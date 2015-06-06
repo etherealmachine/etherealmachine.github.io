@@ -10,6 +10,6 @@
   },
   "scripts": {
     "start": "http-server",
-    "build": "vulcanize --inline-scripts dev.html > index.html"
+    "build": "vulcanize --inline-scripts --inline-css dev.html > index.html"
   }
 }
