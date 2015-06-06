@@ -6107,7 +6107,9 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 				});
 				this.editIndex = -1;
 				this.editTitle = '';
-				this.showLoginLink = true;
+				this.showLoginLink = (
+					window.location.href.startsWith('http://localhost') ||
+					window.location.href.startsWith('https'));
 				this.showLogoutLink = false;
 				this.showLoginForm = false;
 				this.showEditButton = false;
