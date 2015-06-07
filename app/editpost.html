@@ -1,0 +1,63 @@
+<dom-module id="app-editpost">
+	<script src="../bower_components/firebase/firebase.js"></script>
+	<template>
+		<form>
+			<div class="form-group">
+				<input
+						name="title"
+						type="text"
+						class="form-control"
+						placeholder="{{ title }}"
+						value="{{ title }}" />
+			</div>
+			<div class="form-group">
+				<textarea
+						name="content"
+						class="form-control"
+						rows="15">
+				</textarea>
+			</div>
+			<div class="form-group">
+				<button 
+						type="submit"
+						class="btn btn-primary"
+						on-click="save">
+					Save
+				</button>
+				<button 
+						type="submit"
+						class="btn btn-danger pull-right"
+						on-click="delete">
+					Delete	
+				</button>
+			</div>
+		</form>
+	</template>
+	<script>
+		Polymer({
+			is: 'app-editpost',
+			properties: {
+				id: String,
+	      title: String,
+	      content: String
+	    },
+	    ready: function() {
+	    	this.querySelector('textarea').innerHTML = this.content;
+				this.fb = new Firebase('https://etherealmachine.firebaseio.com/posts');
+	    },
+	    save: function(e) {
+	    	e.preventDefault();
+	    	var form = FormValues(e);
+	    	this.fb.child(this.id).set({
+	    		title: form['title'],
+	    		content: form['content'],
+	    		date: Date.now()
+	    	});
+	    },
+	    delete: function(e) {
+	    	e.preventDefault();
+	    	this.fb.child(this.id).remove();
+	    }
+		});
+	</script>
+</dom-module>

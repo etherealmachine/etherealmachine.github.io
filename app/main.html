@@ -11,12 +11,13 @@
 					is="dom-repeat" items="{{ posts }}"
 					observe="title content date">
 				<app-post
+						id="{{ item.id }}"
 						title="{{ item.title }}"
 						content="{{ item.content }}"
-						date="[[ item.date ]]">
+						date="{{ item.date }}">
 				</app-post>
 			</template>
-			<app-newpost></app-newpost>
+			<app-newpost class$="{{ show(authed) }}"></app-newpost>
 	</template>
 	<script>
 		Polymer({
@@ -36,7 +37,17 @@
 					}
 					self.set('posts', posts);
 				});
+				this.authed = false;
+				this.fb.onAuth(function(user) {
+					self.set('authed', user != null && user.provider == 'password');
+				});
 			},
+			show: function(v) {
+				if (v) {
+					return 'show';
+				}
+				return 'hide';
+			}
 		});
 	</script>
 </dom-module>

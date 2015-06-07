@@ -2,6 +2,7 @@
 	<script src="../bower_components/firebase/firebase.js">
   </script>
   <link rel="import" href="markdown.html">
+  <link rel="import" href="editpost.html">
 	<style>
 		.form-inline:not([hidden]) {
 			display: inline;
@@ -18,10 +19,18 @@
 				</div>
 				<div class="panel-body">
 					<app-markdown content="{{ content }}"></app-markdown>
-					<app-editpost
-							title="{{ title }}"
-							content="{{ content }}">
-					</app-editpost>
+					<div class$="{{ show(authed) }}">
+						<a
+								href="#editpost"
+								data-toggle="collapse">edit</a>
+						<div class="collapse" id="editpost">
+							<app-editpost
+									id="{{ id }}"
+									title="{{ title }}"
+									content="{{ content }}">
+							</app-editpost>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -30,18 +39,31 @@
 		Polymer({
 			is: 'app-post',
 			properties: {
-	      title: {
-	        type: String,
-	        notify: true
-	      },
-	      content: {
-	      	type: String,
-	      	notify: true
-	      },
-	      date: {
-	      	type: Number
-	      }
+				id: String,
+				title: String,
+	      content: String,
+	      date: Number
 	    },
+	    ready: function() {
+	    	var self = this;
+				this.authed = false;
+				this.fb = new Firebase(
+					'https://etherealmachine.firebaseio.com');
+				this.fb.onAuth(function(user) {
+					self.set('authed', user != null && user.provider == 'password');
+				});
+				this.editCollapsed = true;
+	    },
+	    edit: function(e) {
+	    	e.preventDefault();
+	    	this.editCollapsed = !this.editCollapsed;
+	    },
+			show: function(authed) {
+				if (!authed) {
+					return 'hide';
+				}
+				return '';
+			},
 			datefmt: function(millis) {
 				return new Date(millis).toLocaleString('en');
 			}

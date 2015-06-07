@@ -1,10 +1,47 @@
 <dom-module id="app-newpost">
+	<script src="../bower_components/firebase/firebase.js">
+  </script>
 	<template>
+		<form>
+			<div class="form-group">
+				<input
+						name="title"
+						type="text"
+						class="form-control"
+						placeholder="Title" />
+			</div>
+			<div class="form-group">
+				<textarea
+						name="content"
+						class="form-control"
+						rows="15"
+						placeholder="Some awesome content."></textarea>
+			</div>
+			<div class="form-group">
+				<button 
+						type="submit"
+						class="btn btn-primary"
+						on-click="save">
+					Save
+				</button>
+			</div>
+		</form>
 	</template>
 	<script>
 		Polymer({
 			is: 'app-newpost',
 			ready: function() {
+				this.fb = new Firebase('https://etherealmachine.firebaseio.com/posts');
+			},
+			save: function(e) {
+				e.preventDefault();
+	    	var form = FormValues(e);
+				this.fb.push({
+					title: form['title'],
+					content: form['content'],
+					date: Date.now()
+				});
+				this.querySelector('form').reset();
 			}
 		});
 	</script>

@@ -16,27 +16,30 @@
 		      <a class="navbar-brand" href="#">etherealmachine.github.io</a>
 		    </div>
 		    <div class="collapse navbar-collapse">
-			    <p
-			    	class="navbar-text navbar-right"
-			    	hidden$="{{ !showLoginLink }}">
-				    <a
-								href="#"
-								role="button"
-								on-click="showLogin">
-							login
-						</a>
-			    </p>
-			    <p
-			    	class="navbar-text navbar-right"
-			    	hidden$="{{ !showLogoutLink }}">
-				    <a
-								href="#"
-								role="button"
-								on-click="logout">
-							logout
-						</a>
+		    	<span class$="{{ show(showLoginLink) }}">
+				    <p
+				    	class="navbar-text navbar-right">
+					    <a
+									href="#"
+									role="button"
+									on-click="showLogin">
+								login
+							</a>
+				    </p>
+				  </span>
+				  <span class$="{{ show(showLogoutLink) }}">
+				    <p
+				    	class="navbar-text navbar-right">
+					    <a
+									href="#"
+									role="button"
+									on-click="logout">
+								logout
+							</a>
+						</p>
+					</span>
 			    <form class="navbar-form navbar-right">
-						<div hidden$="{{ !showLoginForm }}">
+						<div class$="{{ show(showLoginForm) }}">
 							<div class="form-group">
 								<input
 										name="email"
@@ -58,18 +61,20 @@
 					</form>
 				</div>
 		  </div>
-	  	<div
-	  			class="alert alert-danger"
-	  			role="alert"
-	  			hidden$="{{ !alert }}">
-	  		<span>{{ alert }}</span>
-	  	</div>
+		  <div class$="{{ show(alert) }}">
+		  	<div
+		  			class="alert alert-danger"
+		  			role="alert">
+		  		<span>{{ alert }}</span>
+		  	</div>
+		  </div>
 		</nav>
 	</template>
 	<script>
 		Polymer({
 			is: 'app-navbar',
 			ready: function() {
+				var self = this;
 				this.fb = new Firebase('https://etherealmachine.firebaseio.com');
 				this.showLoginLink = (
 					window.location.href.startsWith('http://localhost') ||
@@ -77,6 +82,24 @@
 				this.showLogoutLink = false;
 				this.showLoginForm = false;
 				this.alert = null;
+				this.fb.onAuth(function(user) {
+					var authed = user != null && user.provider == 'password';
+					if (authed) {
+						self.set('showLoginLink', false);
+						self.set('showLogoutLink', true);
+					} else {
+						self.set('showLoginLink', true);
+						self.set('showLogoutLink', false);
+					}
+					self.set('showLoginForm', false);
+					self.set('alert', null);
+				});
+			},
+			show: function(v) {
+				if (v) {
+					return 'show';
+				}
+				return 'hide';
 			},
 			showLogin: function(e) {
 				e.preventDefault();
@@ -95,25 +118,13 @@
 				  	self.set('showLoginLink', true);
 						self.set('showLoginForm', false);
 						self.set('alert', error);
-					} else if (user) {
-						Cookies.set('authToken', user.token, {
-							expires: new Date(user.expires*1000),
-							secure: !window.location.href.startsWith('http://localhost')
-						});
-						self.set('showLoginLink', false);
-						self.set('showLogoutLink', true);
-						self.set('showLoginForm', false);
-						self.set('alert', null);
 					}
 				});
+				this.querySelector('form').reset();
 			},
 			logout: function(e) {
 				e.preventDefault();
 				this.fb.unauth();
-				Cookies.set('authToken', undefined);
-				this.set('showLoginLink', true);
-				this.set('showLogoutLink', false);
-				this.set('showLoginForm', false);
 			}
 		});
 	</script>
