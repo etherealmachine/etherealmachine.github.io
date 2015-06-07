@@ -76,9 +76,10 @@
 			ready: function() {
 				var self = this;
 				this.fb = new Firebase('https://etherealmachine.firebaseio.com');
-				this.showLoginLink = (
+				var secureEndpoint = (
 					window.location.href.startsWith('http://localhost') ||
 					window.location.href.startsWith('https'));
+				this.showLoginLink = secureEndpoint;
 				this.showLogoutLink = false;
 				this.showLoginForm = false;
 				this.alert = null;
@@ -88,7 +89,7 @@
 						self.set('showLoginLink', false);
 						self.set('showLogoutLink', true);
 					} else {
-						self.set('showLoginLink', true);
+						self.set('showLoginLink', secureEndpoint);
 						self.set('showLogoutLink', false);
 					}
 					self.set('showLoginForm', false);
@@ -115,7 +116,7 @@
 					password: form['password']
 				}, function(error, user) {
 					if (error) {
-				  	self.set('showLoginLink', true);
+				  	self.set('showLoginLink', secureEndpoint);
 						self.set('showLoginForm', false);
 						self.set('alert', error);
 					}
