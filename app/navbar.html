@@ -1,0 +1,120 @@
+<dom-module id="app-navbar">
+	<script src="../bower_components/firebase/firebase.js"></script>
+	<script src="form.js"></script>
+	<style>
+		.navbar-right {
+    	margin-right: 0;
+		}
+		.alert {
+			margin-bottom: 0;
+		}
+	</style>
+	<template>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">etherealmachine.github.io</a>
+		    </div>
+		    <div class="collapse navbar-collapse">
+			    <p
+			    	class="navbar-text navbar-right"
+			    	hidden$="{{ !showLoginLink }}">
+				    <a
+								href="#"
+								role="button"
+								on-click="showLogin">
+							login
+						</a>
+			    </p>
+			    <p
+			    	class="navbar-text navbar-right"
+			    	hidden$="{{ !showLogoutLink }}">
+				    <a
+								href="#"
+								role="button"
+								on-click="logout">
+							logout
+						</a>
+			    <form class="navbar-form navbar-right">
+						<div hidden$="{{ !showLoginForm }}">
+							<div class="form-group">
+								<input
+										name="email"
+										class="form-control"
+										value="etherealmachine@gmail.com"
+										type="hidden" />
+								<input
+										name="password"
+										class="form-control"
+										type="password" />
+								<button
+										type="submit"
+										class="btn btn-primary"
+										on-click="login">
+									Login
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+		  </div>
+	  	<div
+	  			class="alert alert-danger"
+	  			role="alert"
+	  			hidden$="{{ !alert }}">
+	  		<span>{{ alert }}</span>
+	  	</div>
+		</nav>
+	</template>
+	<script>
+		Polymer({
+			is: 'app-navbar',
+			ready: function() {
+				this.fb = new Firebase('https://etherealmachine.firebaseio.com');
+				this.showLoginLink = (
+					window.location.href.startsWith('http://localhost') ||
+					window.location.href.startsWith('https'));
+				this.showLogoutLink = false;
+				this.showLoginForm = false;
+				this.alert = null;
+			},
+			showLogin: function(e) {
+				e.preventDefault();
+				this.set('showLoginLink', false);
+				this.set('showLoginForm', true);
+			},
+			login: function(e) {
+				e.preventDefault();
+				var self = this;
+				var form = FormValues(e);
+				this.fb.authWithPassword({
+					email: form['email'],
+					password: form['password']
+				}, function(error, user) {
+					if (error) {
+				  	self.set('showLoginLink', true);
+						self.set('showLoginForm', false);
+						self.set('alert', error);
+					} else if (user) {
+						Cookies.set('authToken', user.token, {
+							expires: new Date(user.expires*1000),
+							secure: !window.location.href.startsWith('http://localhost')
+						});
+						self.set('showLoginLink', false);
+						self.set('showLogoutLink', true);
+						self.set('showLoginForm', false);
+						self.set('alert', null);
+					}
+				});
+			},
+			logout: function(e) {
+				e.preventDefault();
+				this.fb.unauth();
+				Cookies.set('authToken', undefined);
+				this.set('showLoginLink', true);
+				this.set('showLogoutLink', false);
+				this.set('showLoginForm', false);
+			}
+		});
+	</script>
+</dom-module>

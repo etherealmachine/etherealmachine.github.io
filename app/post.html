@@ -1,0 +1,50 @@
+<dom-module id="app-post">
+	<script src="../bower_components/firebase/firebase.js">
+  </script>
+  <link rel="import" href="markdown.html">
+	<style>
+		.form-inline:not([hidden]) {
+			display: inline;
+		}
+		input.form-control {
+			width: 400px;
+		}
+	</style>
+	<template>
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<span>{{ title }}</span> -
+					<span>{{ datefmt(date) }}</span>
+				</div>
+				<div class="panel-body">
+					<app-markdown content="{{ content }}"></app-markdown>
+					<app-editpost
+							title="{{ title }}"
+							content="{{ content }}">
+					</app-editpost>
+				</div>
+			</div>
+		</div>
+	</template>
+	<script>
+		Polymer({
+			is: 'app-post',
+			properties: {
+	      title: {
+	        type: String,
+	        notify: true
+	      },
+	      content: {
+	      	type: String,
+	      	notify: true
+	      },
+	      date: {
+	      	type: Number
+	      }
+	    },
+			datefmt: function(millis) {
+				return new Date(millis).toLocaleString('en');
+			}
+		});
+	</script>
+</dom-module>

@@ -1,166 +1,22 @@
 <dom-module id="app-main">
 	<script src="../bower_components/firebase/firebase.js">
   </script>
-  <link rel="import" href="markdown.html">
-	<style>
-		.navbar-right {
-    	margin-right: 0;
-		}
-		.form-inline:not([hidden]) {
-			display: inline;
-		}
-		input.form-control {
-			width: 400px;
-		}
-	</style>
+  <link rel="import" href="navbar.html">
+  <link rel="import" href="post.html">
+  <link rel="import" href="newpost.html">
 	<template>
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">etherealmachine.github.io</a>
-		    </div>
-		    <div class="collapse navbar-collapse">
-			    <p
-			    	class="navbar-text navbar-right"
-			    	hidden$="{{ !showLoginLink }}">
-				    <a
-								href="#"
-								role="button"
-								on-click="showLogin">
-							login
-						</a>
-			    </p>
-			    <p
-			    	class="navbar-text navbar-right"
-			    	hidden$="{{ !showLogoutLink }}">
-				    <a
-								href="#"
-								role="button"
-								on-click="logout">
-							logout
-						</a>
-			    <form class="navbar-form navbar-right">
-						<div hidden$="{{ !showLoginForm }}">
-							<div class="form-group">
-								<input
-										name="email"
-										class="form-control"
-										value="etherealmachine@gmail.com"
-										type="hidden" />
-								<input
-										name="password"
-										class="form-control"
-										type="password" />
-								<button
-										type="submit"
-										class="btn btn-primary"
-										on-click="login">
-									Login
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-		  </div>
-		</nav>
+		<app-navbar></app-navbar>
 		<div class="container">
 			<template
 					is="dom-repeat" items="{{ posts }}"
 					observe="title content date">
-				<div class="panel panel-default">
-					<div class="panel-heading clearfix">
-						<span>{{ item.title }}</span> -
-						<span>{{ datefmt(item.date) }}</span>
-						<form
-								class="form-inline"
-								hidden$="{{ !showEditForm(editIndex, index) }}">
-							<div class="form-group">
-						    <input
-						    		name="title"
-						    		type="text"
-						    		class="form-control"
-						    		value="{{ editTitle }}" />
-						    <button
-										type="submit"
-						    		class="btn btn-primary"
-						    		on-click="saveTitle">
-						    	Save
-						    </button>
-						   </div>
-					  </form>
-					  <form
-					  		class="form-inline pull-right"
-								hidden$="{{ !showEditButton }}">
-							<div class="checkbox">
-						    <label>
-						      <input name="delete" type="checkbox">
-									<button
-											class="btn btn-danger"
-											on-click="delete">
-										Delete
-									</button>
-						    </label>
-						  </div>
-							<button
-									class="btn btn-primary"
-									on-click="edit">
-								Edit
-							</button>
-						</form>
-					</div>
-					<div class="panel-body">
-						<app-markdown content="{{ item.content }}"></app-markdown>
-						<form
-							hidden$="{{ !showEditForm(editIndex, index) }}">
-							<div class="form-group">
-								<textarea
-									name="content"
-									class="form-control"
-									rows="10">{{ item.content }}</textarea>
-						   </div>
-							<div class="form-group">
-						    <button
-										type="submit"
-						    		class="btn btn-primary"
-						    		on-click="saveContent">
-						    	Save
-						    </button>
-						  </div>
-						</form>
-					</div>
-				</div>
+				<app-post
+						title="{{ item.title }}"
+						content="{{ item.content }}"
+						date="[[ item.date ]]">
+				</app-post>
 			</template>
-			<form>
-				<div class="panel panel-default" hidden$="{{ !showEditButton }}">
-					<div class="panel-heading clearfix">
-						<div class="form-group">
-					    <input
-					    		name="title"
-					    		type="text"
-					    		class="form-control"
-					    		placeholder="Title" />
-					  </div>
-					</div>
-					<div class="panel-body">
-						<div class="form-group">
-							<textarea
-								name="content"
-								class="form-control"
-								rows="10"
-								placeholder="Awesome content."></textarea>
-					   </div>
-						<div class="form-group">
-					    <button
-									type="submit"
-					    		class="btn btn-primary"
-					    		on-click="newPost">
-					    	Save
-					    </button>
-					   </div>
-					</div>
-				</div>
-			</form>
-		</div>
+			<app-newpost></app-newpost>
 	</template>
 	<script>
 		Polymer({
@@ -170,20 +26,6 @@
 				this.posts = [];
 				this.fb = new Firebase(
 					'https://etherealmachine.firebaseio.com/posts');
-				var authToken = Cookies.get('authToken');
-				if (authToken) {
-					this.fb.authWithCustomToken(authToken, function(error, user) {
-						if (error) {
-					  	self.set('showLoginLink', true);
-							self.set('showLoginForm', false);
-						} else if (user) {
-							self.set('showLoginLink', false);
-							self.set('showLogoutLink', true);
-							self.set('showLoginForm', false);
-							self.set('showEditButton', true);
-						}
-					});
-				}
 				this.fb.on('value', function(snapshot) {
 					var posts = [];
 					var val = snapshot.val();
@@ -194,131 +36,7 @@
 					}
 					self.set('posts', posts);
 				});
-				this.editIndex = -1;
-				this.editTitle = '';
-				this.showLoginLink = (
-					window.location.href.startsWith('http://localhost') ||
-					window.location.href.startsWith('https'));
-				this.showLogoutLink = false;
-				this.showLoginForm = false;
-				this.showEditButton = false;
-				this.form = function(e) {
-					var vals = {};
-					e.path.forEach(function(el) {
-						if (el.tagName == 'FORM') {
-							var inputs = el.querySelectorAll('input, textarea');
-							for (var i = 0; i < inputs.length; i++) {
-								var input = inputs[i];
-								vals[input.name] = input.value;
-								if (input.type == 'checkbox') {
-									vals[input.name] = input.checked;
-								}
-							}
-						}
-					});
-					return vals;
-				};
-				this.clearForm = function(e) {
-					e.path.forEach(function(el) {
-						if (el.tagName == 'FORM') {
-							var inputs = el.querySelectorAll('input, textarea');
-							for (var i = 0; i < inputs.length; i++) {
-								inputs[i].value = '';
-							}
-						}
-					});
-				};
 			},
-			showLogin: function(e) {
-				e.preventDefault();
-				this.set('showLoginLink', false);
-				this.set('showLoginForm', true);
-			},
-			login: function(e) {
-				e.preventDefault();
-				var form = this.form(e);
-				var self = this;
-				this.fb.authWithPassword({
-					email: form['email'],
-					password: form['password']
-				}, function(error, user) {
-					if (error) {
-				  	self.set('showLoginLink', true);
-						self.set('showLoginForm', false);
-					} else if (user) {
-						Cookies.set('authToken', user.token, {
-							expires: new Date(user.expires*1000),
-							secure: !window.location.href.startsWith('http://localhost')
-						});
-						self.set('showLoginLink', false);
-						self.set('showLogoutLink', true);
-						self.set('showLoginForm', false);
-						self.set('showEditButton', true);
-					}
-				});
-			},
-			logout: function(e) {
-				e.preventDefault();
-				this.fb.unauth();
-				Cookies.set('authToken', undefined);
-				this.set('showLoginLink', true);
-				this.set('showLogoutLink', false);
-				this.set('showLoginForm', false);
-				this.set('showEditButton', false);
-			},
-			datefmt: function(millis) {
-				return new Date(millis).toLocaleString('en');
-			},
-			showEditForm: function(editIndex, index) {
-				return editIndex == index;
-			},
-			edit: function(e) {
-				e.preventDefault();
-				if (this.editIndex == e.model.index) {
-					this.set('editIndex', -1);
-					this.set('editTitle', '');
-				} else {
-					this.set('editIndex', e.model.index);
-					this.set('editTitle', this.posts[e.model.index].title);
-				}
-			},
-			saveTitle: function(e) {
-				e.preventDefault();
-				var form = this.form(e);
-				var title = this.fb.child(e.model.index + '/title');
-				title.set(form['title'], function(error) {
-					if (error != null) {
-						console.log(error);
-					}
-				});
-			},
-			saveContent: function(e) {
-				e.preventDefault();
-				var form = this.form(e);
-				var content = this.fb.child(e.model.index + '/content');
-				content.set(form['content'], function(error) {
-					if (error != null) {
-						console.log(error);
-					}
-				});
-			},
-			delete: function(e) {
-				e.preventDefault();
-				var form = this.form(e);
-				if (form['delete']) {
-					this.fb.child(this.posts[e.model.index].id).remove();
-				}
-			},
-			newPost: function(e) {
-				e.preventDefault();
-				var form = this.form(e);
-				this.fb.push({
-					title: form['title'],
-					content: form['content'],
-					date: Date.now()
-				});
-				this.clearForm(e);
-			}
 		});
 	</script>
 </dom-module>
