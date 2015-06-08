@@ -26,6 +26,14 @@
 						value$="{{ toTagString(tags) }}" />
 			</div>
 			<div class="form-group">
+				<input
+						name="category"
+						type="text"
+						class="form-control"
+						placeholder$="{{ category }}"
+						value$="{{ category }}" />
+			</div>
+			<div class="form-group">
 				<button 
 						type="submit"
 						class="btn btn-primary"
@@ -57,12 +65,14 @@
 				this.title = '';
 				this.content = '';
 				this.tags = [];
+				this.category = '';
 	    	this.querySelector('textarea').innerHTML = this.content;
 				this.fb.on('value', function(snapshot) {
 					var post = snapshot.val();
 					self.set('title', post.title);
 					self.set('content', post.content);
 					self.set('tags', post.tags);
+					self.set('category', post.category);
 		    	self.querySelector('textarea').innerHTML = self.content;
 				});
 	    },
@@ -88,6 +98,7 @@
 	    		title: form['title'],
 	    		content: form['content'],
 	    		tags: this.toTagSet(form['tagString']),
+	    		category: form['category'],
 	    		date: Date.now()
 	    	});
 	    },

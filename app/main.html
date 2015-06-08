@@ -16,7 +16,7 @@
 						id="posts"
 						is="dom-repeat"
 						items="{{ posts }}"
-						filter="{{ filterPost(filter) }}">
+						filter="{{ filterPost(categoryFilter) }}">
 					<app-post postid="{{ item.id }}"></app-post>
 				</template>
 			</template>
@@ -28,7 +28,7 @@
 			is: 'app-main',
 			ready: function() {
 				var self = this;
-				this.filter = null;
+				this.categoryFilter = '';
 				this.posts = [];
 				this.fb = new Firebase(
 					'https://etherealmachine.firebaseio.com/posts');
@@ -52,17 +52,16 @@
 				this.hashChanged();
 			},
 			hashChanged: function() {
-				var path = location.hash.split('#/folder/');
+				var path = location.hash.split('#/category/');
 				if (path.length == 2) {
-					var tag = 'folder-' + path[1];
-					this.set('filter', tag);
+					this.set('categoryFilter', path[1]);
 				} else {
-					this.set('filter', null);
+					this.set('categoryFilter', '');
 				}
 			},
-			filterPost: function(filter) {
+			filterPost: function(categoryFilter) {
 				return function(post) {
-					return filter == null || post.tags[filter];
+					return !categoryFilter || post.category == categoryFilter;
 				};
 			},
 			show: function(v) {

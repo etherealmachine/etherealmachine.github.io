@@ -36,7 +36,7 @@
 						</li>
 						<template
 								is="dom-repeat"
-								items="{{ folders }}">
+								items="{{ categories }}">
 						  <li>
 						  	<a
 						  			href$="{{ href(item) }}"
@@ -46,8 +46,6 @@
 						  </li>
 						</template>
 					</ul>
-
-		    	<app-folders></app-folders>
 		    	<span class$="{{ show(showLoginLink) }}">
 				    <p
 				    	class="navbar-text navbar-right">
@@ -103,6 +101,21 @@
 		</nav>
 	</template>
 	<script>
+		var nontitle = {
+			'a': true,
+			'an': true,
+			'the': true,
+			'and': true,
+			'but': true,
+			'for': true,
+			'nor': true,
+			'etc': true,
+			'on': true,
+			'at': true,
+			'to': true,
+			'from': true,
+			'by': true
+		};
 		Polymer({
 			is: 'app-navbar',
 			ready: function() {
@@ -128,27 +141,23 @@
 					self.set('alert', null);
 				});
 
-				this.folders = [];
+				this.categories = [];
 				this.fb = new Firebase(
 					'https://etherealmachine.firebaseio.com/posts');
 				this.fb.on('value', function(snapshot) {
-					var folders = {};
+					var categories = {};
 					var val = snapshot.val();
 					for (var id in val) {
 						var post = val[id];
-						if (post.tags != undefined) {
-							for (var tag in post.tags) {
-								if (tag.startsWith('folder-')) {
-									folders[tag.split('folder-')[1]] = true;
-								}
-							}
+						if (post.category) {
+							categories[post.category] = true;
 						}
 					}
-					var folderTags = [];
-					for (var tag in folders) {
-						folderTags.push(tag);
+					var categoryList = [];
+					for (var category in categories) {
+						categoryList.push(category);
 					}
-					self.set('folders', folderTags);
+					self.set('categories', categoryList);
 				});
 
 			},
@@ -183,11 +192,18 @@
 				e.preventDefault();
 				this.fb.unauth();
 			},
-			href: function(folder) {
-				return '/#/folder/' + folder;
+			href: function(category) {
+				return '/#/category/' + category;
 			},
-			title: function(folder) {
-				return folder;
+			title: function(category) {
+				var words = category.split('-');
+				for (var i = 0; i < words.length; i++) {
+					if (nontitle[words[i]]) {
+						continue;
+					}
+					words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+				}
+				return words.join(' ');
 			},
 			nav: function(e) {
 				e.preventDefault();
