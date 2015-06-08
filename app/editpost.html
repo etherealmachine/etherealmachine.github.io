@@ -45,7 +45,10 @@
 		Polymer({
 			is: 'app-editpost',
 			properties: {
-				postid: String
+				postid: {
+					type: String,
+					observer: 'ready'
+				}
 	    },
 	    ready: function() {
 	    	var self = this;

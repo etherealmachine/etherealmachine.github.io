@@ -18,6 +18,13 @@
 						placeholder="Some awesome content."></textarea>
 			</div>
 			<div class="form-group">
+				<input
+						name="tagString"
+						type="text"
+						class="form-control"
+						placeholder="space separated tags" />
+			</div>
+			<div class="form-group">
 				<button 
 						type="submit"
 						class="btn btn-primary"
@@ -33,12 +40,21 @@
 			ready: function() {
 				this.fb = new Firebase('https://etherealmachine.firebaseio.com/posts');
 			},
+	    toTagSet: function(tagString) {
+	    	var tags = tagString.split(' ');
+	    	var tagSet = {};
+	    	for (var i = 0; i < tags.length; i++) {
+	    		tagSet[tags[i]] = true;
+	    	}
+	    	return tagSet;
+	    },
 			save: function(e) {
 				e.preventDefault();
 	    	var form = FormValues(e);
 				this.fb.push({
 					title: form['title'],
 					content: form['content'],
+					tags: this.toTagSet(form['tagString']),
 					date: Date.now()
 				});
 				this.querySelector('form').reset();

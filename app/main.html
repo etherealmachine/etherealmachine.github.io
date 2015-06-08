@@ -1,15 +1,26 @@
 <dom-module id="app-main">
 	<script src="../bower_components/firebase/firebase.js"></script>
-	<script src="../bower_components/director/build/director.min.js"></script>
   <link rel="import" href="navbar.html">
   <link rel="import" href="post.html">
   <link rel="import" href="newpost.html">
 	<template>
 		<app-navbar></app-navbar>
 		<div class="container">
-			<template is="dom-repeat" items="{{ posts }}" observe="posts">
-				<app-post postid="{{ item }}"></app-post>
+
+			<template is="dom-if" if="{{ singlePost }}">
+				<app-post postid="{{ postid }}"></app-post>
 			</template>
+
+			<template is="dom-if" if="{{ posts }}">
+				<template
+						id="posts"
+						is="dom-repeat"
+						items="{{ posts }}"
+						filter="{{ filterPost(filter) }}">
+					<app-post postid="{{ item.id }}"></app-post>
+				</template>
+			</template>
+
 			<app-newpost class$="{{ show(authed) }}"></app-newpost>
 	</template>
 	<script>
@@ -17,6 +28,7 @@
 			is: 'app-main',
 			ready: function() {
 				var self = this;
+				this.filter = null;
 				this.posts = [];
 				this.fb = new Firebase(
 					'https://etherealmachine.firebaseio.com/posts');
@@ -24,7 +36,9 @@
 					var posts = [];
 					var val = snapshot.val();
 					for (var id in val) {
-						posts.push(id);
+						var post = val[id];
+						post.id = id;
+						posts.push(post);
 					}
 					self.set('posts', posts);
 				});
@@ -32,6 +46,24 @@
 				this.fb.onAuth(function(user) {
 					self.set('authed', user != null && user.provider == 'password');
 				});
+				window.onhashchange = function() {
+					self.hashChanged();
+				};
+				this.hashChanged();
+			},
+			hashChanged: function() {
+				var path = location.hash.split('#/folder/');
+				if (path.length == 2) {
+					var tag = 'folder-' + path[1];
+					this.set('filter', tag);
+				} else {
+					this.set('filter', null);
+				}
+			},
+			filterPost: function(filter) {
+				return function(post) {
+					return filter == null || post.tags[filter];
+				};
 			},
 			show: function(v) {
 				if (v) {

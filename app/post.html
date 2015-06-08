@@ -25,9 +25,9 @@
 					</div>
 					<div class$="{{ show(authed) }}">
 						<a
-								href="#editpost"
+								href$="{{ getid('#edit', postid) }}"
 								data-toggle="collapse">edit</a>
-						<div class="collapse" id="editpost">
+						<div class="collapse" id$="{{ getid('edit', postid) }}">
 							<app-editpost postid="{{ postid }}"></app-editpost>
 						</div>
 					</div>
@@ -39,12 +39,18 @@
 		Polymer({
 			is: 'app-post',
 			properties: {
-				postid: String
+				postid: {
+					type: String,
+					observer: 'init'
+				}
 	    },
 	    ready: function() {
-	    	var self = this;
 				this.authed = false;
 				this.editCollapsed = true;
+				this.init();
+			},
+			init: function() {
+	    	var self = this;
 				this.fb = new Firebase(
 					'https://etherealmachine.firebaseio.com/posts/' + this.postid);
 				this.fb.onAuth(function(user) {
@@ -61,6 +67,9 @@
 					self.set('content', post.content);
 					self.set('tags', post.tags);
 				});
+	    },
+	    getid: function(pre, id) {
+	    	return pre + this.postid;
 	    },
 	    toTagString: function(tagSet) {
 				var tags = [];
