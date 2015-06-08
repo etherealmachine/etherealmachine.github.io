@@ -13,8 +13,8 @@
 	<template>
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
-					<span>{{ title }}</span> -
-					<span>{{ datefmt(date) }}</span>
+					<h4>{{ title }}</h4>
+					<p>Posted <span>{{ datefmt(creation) }}</p>
 				</div>
 				<div class="panel-body">
 					<app-markdown content="{{ content }}"></app-markdown>
@@ -60,12 +60,18 @@
 				this.date = 0;
 				this.content = '';
 				this.tags = [];
+				this.category = '';
+				this.creation = 0;
+				this.last_edit = 0;
 				this.fb.on('value', function(snapshot) {
 					var post = snapshot.val();
 					self.set('title', post.title);
 					self.set('date', post.date);
 					self.set('content', post.content);
 					self.set('tags', post.tags);
+					self.set('category', post.category);
+					self.set('creation', post.creation);
+					self.set('last_edit', post.last_edit);
 				});
 	    },
 	    getid: function(pre, id) {
@@ -89,7 +95,7 @@
 				return '';
 			},
 			datefmt: function(millis) {
-				return new Date(millis).toLocaleString('en');
+				return moment(millis).calendar();
 			}
 		});
 	</script>

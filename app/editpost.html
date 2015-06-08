@@ -66,6 +66,8 @@
 				this.content = '';
 				this.tags = [];
 				this.category = '';
+				this.creation = 0;
+				this.last_edit = 0;
 	    	this.querySelector('textarea').innerHTML = this.content;
 				this.fb.on('value', function(snapshot) {
 					var post = snapshot.val();
@@ -73,6 +75,8 @@
 					self.set('content', post.content);
 					self.set('tags', post.tags);
 					self.set('category', post.category);
+					self.set('creation', post.creation);
+					self.set('last_edit', post.last_edit);
 		    	self.querySelector('textarea').innerHTML = self.content;
 				});
 	    },
@@ -99,7 +103,8 @@
 	    		content: form['content'],
 	    		tags: this.toTagSet(form['tagString']),
 	    		category: form['category'],
-	    		date: Date.now()
+	    		creation: this.creation,
+	    		last_edit: Date.now()
 	    	});
 	    },
 	    delete: function(e) {

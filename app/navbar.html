@@ -101,21 +101,6 @@
 		</nav>
 	</template>
 	<script>
-		var nontitle = {
-			'a': true,
-			'an': true,
-			'the': true,
-			'and': true,
-			'but': true,
-			'for': true,
-			'nor': true,
-			'etc': true,
-			'on': true,
-			'at': true,
-			'to': true,
-			'from': true,
-			'by': true
-		};
 		Polymer({
 			is: 'app-navbar',
 			ready: function() {
@@ -215,5 +200,20 @@
 				return false;
 			}
 		});
+		var nontitle = {
+			'a': true,
+			'an': true,
+			'the': true,
+			'and': true,
+			'but': true,
+			'for': true,
+			'nor': true,
+			'etc': true,
+			'on': true,
+			'at': true,
+			'to': true,
+			'from': true,
+			'by': true
+		};
 	</script>
 </dom-module>

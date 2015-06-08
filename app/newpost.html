@@ -51,11 +51,13 @@
 			save: function(e) {
 				e.preventDefault();
 	    	var form = FormValues(e);
+	    	var now = Date.now();
 				this.fb.push({
 					title: form['title'],
 					content: form['content'],
 					tags: this.toTagSet(form['tagString']),
-					date: Date.now()
+					creation: now,
+					last_edit: now
 				});
 				this.querySelector('form').reset();
 			}
