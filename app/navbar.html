@@ -13,14 +13,47 @@
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">etherealmachine.github.io</a>
+		    	<button
+		    			type="button"
+		    			class="navbar-toggle collapsed"
+		    			data-toggle="collapse"
+		    			data-target="#navbar-collapse">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="/#" on-click="nav">
+		      	etherealmachine.github.io
+		      </a>
 		    </div>
-		    <div class="collapse navbar-collapse">
+		    <div id="navbar-collapse" class="collapse navbar-collapse">
+		    	<ul class="nav navbar-nav">
+						<li class="active">
+							<a href="/#" on-click="nav">
+								Home <span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<template
+								is="dom-repeat"
+								items="{{ folders }}"
+								observe="folders">
+						  <li>
+						  	<a
+						  			href$="{{ href(item) }}"
+						  			on-click="nav">
+						  		<span>{{ title(item) }}</span>
+						  	</a>
+						  </li>
+						</template>
+					</ul>
+
+		    	<app-folders></app-folders>
 		    	<span class$="{{ show(showLoginLink) }}">
 				    <p
 				    	class="navbar-text navbar-right">
 					    <a
-									href="#"
+									href="/#/login"
 									role="button"
 									on-click="showLogin">
 								login
@@ -31,7 +64,7 @@
 				    <p
 				    	class="navbar-text navbar-right">
 					    <a
-									href="#"
+									href="/#/logout"
 									role="button"
 									on-click="logout">
 								logout
@@ -95,6 +128,30 @@
 					self.set('showLoginForm', false);
 					self.set('alert', null);
 				});
+
+				this.folders = [];
+				this.fb = new Firebase(
+					'https://etherealmachine.firebaseio.com/posts');
+				this.fb.on('value', function(snapshot) {
+					var folders = {};
+					var val = snapshot.val();
+					for (var id in val) {
+						var post = val[id];
+						if (post.tags != undefined) {
+							for (var tag in post.tags) {
+								if (tag.startsWith('folder-')) {
+									folders[tag.split('folder-')[1]] = true;
+								}
+							}
+						}
+					}
+					var folderTags = [];
+					for (var tag in folders) {
+						folderTags.push(tag);
+					}
+					self.set('folders', folderTags);
+				});
+
 			},
 			show: function(v) {
 				if (v) {
@@ -126,6 +183,21 @@
 			logout: function(e) {
 				e.preventDefault();
 				this.fb.unauth();
+			},
+			href: function(folder) {
+				return '/#/folder/' + folder;
+			},
+			title: function(folder) {
+				return folder;
+			},
+			nav: function(e) {
+				e.preventDefault();
+				var href = e.target.href;
+				if (href == undefined) {
+					href = e.target.parentNode.href;
+				}
+				window.location.hash = href.split('#')[1];
+				return false;
 			}
 		});
 	</script>

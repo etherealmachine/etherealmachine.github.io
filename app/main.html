@@ -1,21 +1,14 @@
 <dom-module id="app-main">
-	<script src="../bower_components/firebase/firebase.js">
-  </script>
+	<script src="../bower_components/firebase/firebase.js"></script>
+	<script src="../bower_components/director/build/director.min.js"></script>
   <link rel="import" href="navbar.html">
   <link rel="import" href="post.html">
   <link rel="import" href="newpost.html">
 	<template>
 		<app-navbar></app-navbar>
 		<div class="container">
-			<template
-					is="dom-repeat" items="{{ posts }}"
-					observe="title content date">
-				<app-post
-						id="{{ item.id }}"
-						title="{{ item.title }}"
-						content="{{ item.content }}"
-						date="{{ item.date }}">
-				</app-post>
+			<template is="dom-repeat" items="{{ posts }}" observe="posts">
+				<app-post postid="{{ item }}"></app-post>
 			</template>
 			<app-newpost class$="{{ show(authed) }}"></app-newpost>
 	</template>
@@ -31,9 +24,7 @@
 					var posts = [];
 					var val = snapshot.val();
 					for (var id in val) {
-						var post = val[id];
-						post.id = id;
-						posts.push(post);
+						posts.push(id);
 					}
 					self.set('posts', posts);
 				});

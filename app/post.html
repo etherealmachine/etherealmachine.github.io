@@ -1,6 +1,5 @@
 <dom-module id="app-post">
-	<script src="../bower_components/firebase/firebase.js">
-  </script>
+	<script src="../bower_components/firebase/firebase.js"></script>
   <link rel="import" href="markdown.html">
   <link rel="import" href="editpost.html">
 	<style>
@@ -19,16 +18,17 @@
 				</div>
 				<div class="panel-body">
 					<app-markdown content="{{ content }}"></app-markdown>
+					<div>
+						<template is="dom-repeat" items="{{ toTagString(tags) }}">
+							<span class="label label-default">{{ item }}</span>
+						</template>
+					</div>
 					<div class$="{{ show(authed) }}">
 						<a
 								href="#editpost"
 								data-toggle="collapse">edit</a>
 						<div class="collapse" id="editpost">
-							<app-editpost
-									id="{{ id }}"
-									title="{{ title }}"
-									content="{{ content }}">
-							</app-editpost>
+							<app-editpost postid="{{ postid }}"></app-editpost>
 						</div>
 					</div>
 				</div>
@@ -39,20 +39,35 @@
 		Polymer({
 			is: 'app-post',
 			properties: {
-				id: String,
-				title: String,
-	      content: String,
-	      date: Number
+				postid: String
 	    },
 	    ready: function() {
 	    	var self = this;
 				this.authed = false;
+				this.editCollapsed = true;
 				this.fb = new Firebase(
-					'https://etherealmachine.firebaseio.com');
+					'https://etherealmachine.firebaseio.com/posts/' + this.postid);
 				this.fb.onAuth(function(user) {
 					self.set('authed', user != null && user.provider == 'password');
 				});
-				this.editCollapsed = true;
+				this.title = '';
+				this.date = 0;
+				this.content = '';
+				this.tags = [];
+				this.fb.on('value', function(snapshot) {
+					var post = snapshot.val();
+					self.set('title', post.title);
+					self.set('date', post.date);
+					self.set('content', post.content);
+					self.set('tags', post.tags);
+				});
+	    },
+	    toTagString: function(tagSet) {
+				var tags = [];
+				for (var tag in tagSet) {
+					tags.push(tag);
+				}
+				return tags;
 	    },
 	    edit: function(e) {
 	    	e.preventDefault();

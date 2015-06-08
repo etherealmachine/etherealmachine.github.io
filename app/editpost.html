@@ -7,8 +7,8 @@
 						name="title"
 						type="text"
 						class="form-control"
-						placeholder="{{ title }}"
-						value="{{ title }}" />
+						placeholder$="{{ title }}"
+						value$="{{ title }}" />
 			</div>
 			<div class="form-group">
 				<textarea
@@ -16,6 +16,14 @@
 						class="form-control"
 						rows="15">
 				</textarea>
+			</div>
+			<div class="form-group">
+				<input
+						name="tagString"
+						type="text"
+						class="form-control"
+						placeholder$="{{ toTagString(tags) }}"
+						value$="{{ toTagString(tags) }}" />
 			</div>
 			<div class="form-group">
 				<button 
@@ -37,26 +45,52 @@
 		Polymer({
 			is: 'app-editpost',
 			properties: {
-				id: String,
-	      title: String,
-	      content: String
+				postid: String
 	    },
 	    ready: function() {
+	    	var self = this;
+				this.fb = new Firebase(
+					'https://etherealmachine.firebaseio.com/posts/' + this.postid);
+				this.title = '';
+				this.content = '';
+				this.tags = [];
 	    	this.querySelector('textarea').innerHTML = this.content;
-				this.fb = new Firebase('https://etherealmachine.firebaseio.com/posts');
+				this.fb.on('value', function(snapshot) {
+					var post = snapshot.val();
+					self.set('title', post.title);
+					self.set('content', post.content);
+					self.set('tags', post.tags);
+		    	self.querySelector('textarea').innerHTML = self.content;
+				});
+	    },
+	    toTagString: function(tagSet) {
+				var tags = [];
+				for (var tag in tagSet) {
+					tags.push(tag);
+				}
+				return tags.join(' ');
+	    },
+	    toTagSet: function(tagString) {
+	    	var tags = tagString.split(' ');
+	    	var tagSet = {};
+	    	for (var i = 0; i < tags.length; i++) {
+	    		tagSet[tags[i]] = true;
+	    	}
+	    	return tagSet;
 	    },
 	    save: function(e) {
 	    	e.preventDefault();
 	    	var form = FormValues(e);
-	    	this.fb.child(this.id).set({
+	    	this.fb.set({
 	    		title: form['title'],
 	    		content: form['content'],
+	    		tags: this.toTagSet(form['tagString']),
 	    		date: Date.now()
 	    	});
 	    },
 	    delete: function(e) {
 	    	e.preventDefault();
-	    	this.fb.child(this.id).remove();
+	    	this.fb.remove();
 	    }
 		});
 	</script>
