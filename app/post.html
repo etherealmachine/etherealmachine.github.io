@@ -15,7 +15,7 @@
 				<div class="panel-heading clearfix">
 					<h4>
 						<a
-							href$="{{ getid('/#/post/', postid) }}"
+							href$="{{ concat('/#/post/', slug) }}"
 							on-click="nav">
 							<span>{{ title }}</span>
 						</a>
@@ -31,9 +31,9 @@
 					</div>
 					<div class$="{{ show(authed) }}">
 						<a
-								href$="{{ getid('#edit', postid) }}"
+								href$="{{ concat('#edit', postid) }}"
 								data-toggle="collapse">edit</a>
-						<div class="collapse" id$="{{ getid('edit', postid) }}">
+						<div class="collapse" id$="{{ concat('edit', postid) }}">
 							<app-editpost postid="{{ postid }}"></app-editpost>
 						</div>
 					</div>
@@ -72,6 +72,7 @@
 				this.fb.on('value', function(snapshot) {
 					var post = snapshot.val();
 					self.set('title', post.title);
+					self.set('slug', self.slugify(post.title));
 					self.set('date', post.date);
 					self.set('content', post.content);
 					self.set('tags', post.tags);
@@ -80,8 +81,8 @@
 					self.set('last_edit', post.last_edit);
 				});
 	    },
-	    getid: function(pre, id) {
-	    	return pre + this.postid;
+	    concat: function(pre, id) {
+	    	return pre + id;
 	    },
 	    toTagString: function(tagSet) {
 				var tags = [];
@@ -99,6 +100,9 @@
 					return 'hide';
 				}
 				return '';
+			},
+			slugify: function(s) {
+				return s.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,'');
 			},
 			datefmt: function(millis) {
 				return moment(millis).calendar();

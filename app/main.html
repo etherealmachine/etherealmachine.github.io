@@ -67,7 +67,8 @@
 						return post.category == categoryFilter;
 					}
 					if (postFilter) {
-						return post.id == postFilter;
+						var slug = post.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,'');
+						return slug == postFilter;
 					}
 					return true;
 				};
