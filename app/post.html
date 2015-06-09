@@ -13,7 +13,13 @@
 	<template>
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
-					<h4>{{ title }}</h4>
+					<h4>
+						<a
+							href$="{{ getid('/#/post/', postid) }}"
+							on-click="nav">
+							<span>{{ title }}</span>
+						</a>
+					</h4>
 					<p>Posted <span>{{ datefmt(creation) }}</p>
 				</div>
 				<div class="panel-body">
@@ -96,6 +102,15 @@
 			},
 			datefmt: function(millis) {
 				return moment(millis).calendar();
+			},
+			nav: function(e) {
+				e.preventDefault();
+				var href = e.target.href;
+				if (href == undefined) {
+					href = e.target.parentNode.href;
+				}
+				window.location.hash = href.split('#')[1];
+				return false;
 			}
 		});
 	</script>
