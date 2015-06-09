@@ -6814,7 +6814,11 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 	<template>
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
-					<h4>{{ title }}</h4>
+					<h4>
+						<a href$="{{ getid('/#/post/', postid) }}" on-click="nav">
+							<span>{{ title }}</span>
+						</a>
+					</h4>
 					<p>Posted <span>{{ datefmt(creation) }}</span></p>
 				</div>
 				<div class="panel-body">
@@ -6895,6 +6899,15 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 			},
 			datefmt: function(millis) {
 				return moment(millis).calendar();
+			},
+			nav: function(e) {
+				e.preventDefault();
+				var href = e.target.href;
+				if (href == undefined) {
+					href = e.target.parentNode.href;
+				}
+				window.location.hash = href.split('#')[1];
+				return false;
 			}
 		});
 	</script>
@@ -7175,6 +7188,9 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 				<input name="tagString" type="text" class="form-control" placeholder="space separated tags">
 			</div>
 			<div class="form-group">
+				<input name="category" type="text" class="form-control" placeholder="category" c="">
+			</div>
+			<div class="form-group">
 				<button type="submit" class="btn btn-primary" on-click="save">
 					Save
 				</button>
@@ -7203,6 +7219,7 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 					title: form['title'],
 					content: form['content'],
 					tags: this.toTagSet(form['tagString']),
+					category: form['category'],
 					creation: now,
 					last_edit: now
 				});
@@ -7480,23 +7497,19 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 		<app-navbar></app-navbar>
 		<div class="container">
 
-			<template is="dom-if" if="{{ singlePost }}">
-				<app-post postid="{{ postid }}"></app-post>
-			</template>
-
-			<template is="dom-if" if="{{ posts }}">
-				<template id="posts" is="dom-repeat" items="{{ posts }}" filter="{{ filterPost(categoryFilter) }}">
-					<app-post postid="{{ item.id }}"></app-post>
-				</template>
+			<template id="posts" is="dom-repeat" items="{{ posts }}" filter="{{ filterPost(postFilter, categoryFilter) }}">
+				<app-post postid="{{ item.id }}"></app-post>
 			</template>
 
 			<app-newpost class$="{{ show(authed) }}"></app-newpost>
+
 	</div></template>
 	<script>
 		Polymer({
 			is: 'app-main',
 			ready: function() {
 				var self = this;
+				this.postFilter = '';
 				this.categoryFilter = '';
 				this.posts = [];
 				this.fb = new Firebase(
@@ -7521,16 +7534,28 @@ function Nc(a,b){J(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 				this.hashChanged();
 			},
 			hashChanged: function() {
-				var path = location.hash.split('#/category/');
-				if (path.length == 2) {
-					this.set('categoryFilter', path[1]);
-				} else {
-					this.set('categoryFilter', '');
+				var hash = location.hash;
+				var postFilter = '';
+				var categoryFilter = '';
+				if (hash.includes('category')) {
+					var path = location.hash.split('#/category/');
+					categoryFilter = path[1];
+				} else if (hash.includes('post')) {
+					var path = location.hash.split('#/post/');
+					postFilter = path[1];
 				}
+				this.set('postFilter', postFilter);
+				this.set('categoryFilter', categoryFilter);
 			},
-			filterPost: function(categoryFilter) {
+			filterPost: function(postFilter, categoryFilter) {
 				return function(post) {
-					return !categoryFilter || post.category == categoryFilter;
+					if (categoryFilter) {
+						return post.category == categoryFilter;
+					}
+					if (postFilter) {
+						return post.id == postFilter;
+					}
+					return true;
 				};
 			},
 			show: function(v) {
