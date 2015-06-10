@@ -11,31 +11,30 @@
 		}
 	</style>
 	<template>
-			<div class="panel panel-default">
-				<div class="panel-heading clearfix">
-					<h4>
-						<a
-							href$="{{ concat('/#/post/', slug) }}"
-							on-click="nav">
-							<span>{{ title }}</span>
-						</a>
-					</h4>
-					<p>Posted <span>{{ datefmt(creation) }}</p>
+		<div class="panel panel-default">
+			<div class="panel-heading clearfix">
+				<h4>
+					<a
+						href$="{{ concat('/#/post/', slug) }}"
+						on-click="nav">
+						<span>{{ title }}</span>
+					</a>
+				</h4>
+				<p>Posted <span>{{ datefmt(creation) }}</p>
+			</div>
+			<div class="panel-body">
+				<app-markdown content="{{ content }}"></app-markdown>
+				<div>
+					<template is="dom-repeat" items="{{ toTagString(tags) }}">
+						<span class="label label-default">{{ item }}</span>
+					</template>
 				</div>
-				<div class="panel-body">
-					<app-markdown content="{{ content }}"></app-markdown>
-					<div>
-						<template is="dom-repeat" items="{{ toTagString(tags) }}">
-							<span class="label label-default">{{ item }}</span>
-						</template>
-					</div>
-					<div class$="{{ show(authed) }}">
-						<a
-								href$="{{ concat('#edit', postid) }}"
-								data-toggle="collapse">edit</a>
-						<div class="collapse" id$="{{ concat('edit', postid) }}">
-							<app-editpost postid="{{ postid }}"></app-editpost>
-						</div>
+				<div class$="{{ show(authed) }}">
+					<a
+							href$="{{ concat('#edit', postid) }}"
+							data-toggle="collapse">edit</a>
+					<div class="collapse" id$="{{ concat('edit', postid) }}">
+						<app-editpost postid="{{ postid }}"></app-editpost>
 					</div>
 				</div>
 			</div>
@@ -69,6 +68,8 @@
 				this.category = '';
 				this.creation = 0;
 				this.last_edit = 0;
+				self.prev = '';
+				self.next = '';
 				this.fb.on('value', function(snapshot) {
 					var post = snapshot.val();
 					self.set('title', post.title);

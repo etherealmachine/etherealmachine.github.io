@@ -23,14 +23,14 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="/#" on-click="nav">
+		      <a class="navbar-brand" href="#" on-click="nav">
 		      	etherealmachine.github.io
 		      </a>
 		    </div>
 		    <div id="navbar-collapse" class="collapse navbar-collapse">
 		    	<ul class="nav navbar-nav">
 						<li class="active">
-							<a href="/#" on-click="nav">
+							<a href="#" on-click="nav">
 								Home <span class="sr-only">(current)</span>
 							</a>
 						</li>
@@ -50,7 +50,7 @@
 				    <p
 				    	class="navbar-text navbar-right">
 					    <a
-									href="/#/login"
+									href="#/login"
 									role="button"
 									on-click="showLogin">
 								login
@@ -61,7 +61,7 @@
 				    <p
 				    	class="navbar-text navbar-right">
 					    <a
-									href="/#/logout"
+									href="#/logout"
 									role="button"
 									on-click="logout">
 								logout
@@ -101,14 +101,14 @@
 		</nav>
 	</template>
 	<script>
+		var secureEndpoint = (
+			window.location.href.startsWith('http://localhost') ||
+			window.location.href.startsWith('https'));
 		Polymer({
 			is: 'app-navbar',
 			ready: function() {
 				var self = this;
 				this.fb = new Firebase('https://etherealmachine.firebaseio.com');
-				var secureEndpoint = (
-					window.location.href.startsWith('http://localhost') ||
-					window.location.href.startsWith('https'));
 				this.showLoginLink = secureEndpoint;
 				this.showLogoutLink = false;
 				this.showLoginForm = false;
@@ -178,7 +178,7 @@
 				this.fb.unauth();
 			},
 			href: function(category) {
-				return '/#/category/' + category;
+				return '#/category/' + category;
 			},
 			title: function(category) {
 				var words = category.split('-');
@@ -189,15 +189,6 @@
 					words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
 				}
 				return words.join(' ');
-			},
-			nav: function(e) {
-				e.preventDefault();
-				var href = e.target.href;
-				if (href == undefined) {
-					href = e.target.parentNode.href;
-				}
-				window.location.hash = href.split('#')[1];
-				return false;
 			}
 		});
 		var nontitle = {
