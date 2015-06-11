@@ -23,14 +23,14 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#" on-click="nav">
+		      <a class="navbar-brand" href$="{{ href('#') }}">
 		      	etherealmachine.github.io
 		      </a>
 		    </div>
 		    <div id="navbar-collapse" class="collapse navbar-collapse">
 		    	<ul class="nav navbar-nav">
 						<li class="active">
-							<a href="#" on-click="nav">
+							<a href$="{{ href('#') }}">
 								Home <span class="sr-only">(current)</span>
 							</a>
 						</li>
@@ -38,9 +38,7 @@
 								is="dom-repeat"
 								items="{{ categories }}">
 						  <li>
-						  	<a
-						  			href$="{{ href(item) }}"
-						  			on-click="nav">
+						  	<a href$="{{ categoryLink(item) }}">
 						  		<span>{{ title(item) }}</span>
 						  	</a>
 						  </li>
@@ -177,8 +175,11 @@
 				e.preventDefault();
 				this.fb.unauth();
 			},
-			href: function(category) {
+			categoryLink: function(category) {
 				return '#/category/' + category;
+			},
+			href: function(url) {
+				return url;
 			},
 			title: function(category) {
 				var words = category.split('-');
