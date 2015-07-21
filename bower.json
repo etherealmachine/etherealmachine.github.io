@@ -10,12 +10,8 @@
     "bower_components"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0",
-    "firebase": "2.2.5",
-    "marked": "~0.3.3",
     "bootstrap": "~3.3.4",
     "jquery": "~2.1.4",
-    "moment": "~2.10.3",
     "MathJax": "~2.5.3"
   }
 }
