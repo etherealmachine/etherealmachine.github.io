@@ -27,7 +27,12 @@
 		href="bower_components/highlightjs/styles/github.css">
 <script>hljs.initHighlightingOnLoad();</script>
 <link rel="stylesheet" href="css/main.css">
-<no value>
+<script>
+console.log('preview enabled');
+new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
+	window.location = window.location;
+};
+</script>
 
 	</head>
 	<body>

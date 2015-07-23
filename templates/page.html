@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		{{ template "head" }}
+		{{ template "head" . }}
 	</head>
 	<body>
 		<div class="container">
-			{{ template "nav" }}
+			{{ template "nav" . }}
 			<h3><a href="{{ url . }}">{{ .Meta.Title }}</a>
 				<small>Posted {{ displaytime .Meta.FileInfo.ModTime }}</small>
 			</h3>
 			<div class="content">
 				{{ .Content }}
 			</div>
-			{{ template "footer" }}
+			{{ template "footer" . }}
 		</div>
 	</body>
 </html>

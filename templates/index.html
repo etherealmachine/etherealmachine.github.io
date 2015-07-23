@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		{{ template "head" }}
+		{{ template "head" . }}
 	</head>
 	<body>
 		<div class="container">
-			{{ template "nav" }}
+			{{ template "nav" . }}
 			<div>
 				<h2>Recent Posts</h2>
 				{{ range .Recent }}
@@ -16,7 +16,7 @@
 					<p>{{ .Meta.Summary }}</p>
 				{{ end }}
 			</div>
-			{{ template "footer" }}
+			{{ template "footer" . }}
 		</div>
 	</body>
 </html>

@@ -27,7 +27,12 @@
 		href="bower_components/highlightjs/styles/github.css">
 <script>hljs.initHighlightingOnLoad();</script>
 <link rel="stylesheet" href="css/main.css">
-<no value>
+<script>
+console.log('preview enabled');
+new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
+	window.location = window.location;
+};
+</script>
 
 	</head>
 	<body>
@@ -46,12 +51,146 @@
 </nav>
 
 			<h3><a href="orbital-mechanics.html">Orbital Mechanics</a>
-				<small>Posted Jul 22, 2015</small>
+				<small>Posted Jul 23, 2015</small>
 			</h3>
 			<div class="content">
-				<p>(4.1) $F = ma$</p>
+				<p>This is a copy of Robert A. Braeunig&rsquo;s inestimable  <a
+href="http://www.braeunig.us/space/index.htm">Rocket &amp; Space Technology</a>. I
+learn best by following examples, so I created a workbook where I could copy the
+text and follow along by solving the problems.</p>
 
-<p>(4.2) $F = G \left ( \frac{m*1m*2}{r^2} \right )$</p>
+<p><strong>Orbital mechanics</strong>, also called flight mechanics, is the study of the motions
+of artificial satellites and space vehicles moving under the influence of forces
+such as gravity, atmospheric drag, thrust, etc. Orbital mechanics is a modern
+offshoot of celestial mechanics which is the study of the motions of natural
+celestial bodies such as the moon and planets. The root of orbital mechanics can
+be traced back to the 17th century when mathematician Isaac Newton (1642-1727)
+put forward his laws of motion and formulated his law of universal gravitation.
+The engineering applications of orbital mechanics include ascent trajectories,
+reentry and landing, rendezvous computations, and lunar and interplanetary
+trajectories.</p>
+
+<h2>Conic Sections</h2>
+
+<p><img
+        src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590"
+        width="500px"
+        class="pull-right"></p>
+
+<p>A <strong>conic section</strong>, or just <strong>conic</strong>, is a curve formed by passing a plane
+through a right circular cone. As shown in Figure 4.1, the angular orientation
+of the plane relative to the cone determines whether the conic section is a
+circle, ellipse, parabola, or hyperbola. The circle and the ellipse arise when
+the intersection of cone and plane is a bounded curve. The circle is a special
+case of the ellipse in which the plane is perpendicular to the axis of the cone.
+If the plane is parallel to a generator line of the cone, the conic is called a
+parabola. Finally, if the intersection is an unbounded curve and the plane is
+not parallel to a generator line of the cone, the figure is a hyperbola. In the
+latter case the plane will intersect both halves of the cone, producing two
+separate curves.</p>
+
+<p>We can define all conic sections in terms of the eccentricity. The type of conic
+section is also related to the semi-major axis and the energy. The table below
+shows the relationships between eccentricity, semi-major axis, and energy and
+the type of conic section.</p>
+<div class="pull-left">
+<table class="table">
+<thead>
+<tr>
+<th>Conic Section</th>
+<th>Eccentricity, e</th>
+<th>Semi-Major Axis</th>
+<th>Energy</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Circle</td>
+<td>0</td>
+<td>= radius</td>
+<td>&lt; 0</td>
+</tr>
+
+<tr>
+<td>Ellipse</td>
+<td>0 &lt; e &lt; 1</td>
+<td>&gt; 0</td>
+<td>&lt; 0</td>
+</tr>
+
+<tr>
+<td>Parabola</td>
+<td>1</td>
+<td>infinity</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>Hyperbola</td>
+<td>&gt; 1</td>
+<td>&lt; 0</td>
+<td>&gt; 0</td>
+</tr>
+</tbody>
+</table>
+</div><div class="clearfix">
+</div>
+<p>Satellite orbits can be any of the four conic sections. This page deals mostly
+with elliptical orbits, though we conclude with an examination of the hyperbolic
+orbit.</p>
+
+<h2>Orbital Elements</h2>
+
+<p>To mathematically describe an orbit one must define six quantities, called
+orbital elements. They are
+* Semi-Major Axis, a
+* Eccentricity, e
+* Inclination, i
+* Argument of Periapsis, $\omega$
+* Time of Periapsis Passage, T
+* Longitude of Ascending Node, $\Omega$</p>
+
+<p>An orbiting satellite follows an oval shaped path known as an ellipse with the
+body being orbited, called the primary, located at one of two points called
+foci. An ellipse is defined to be a curve with the following property: for each
+point on an ellipse, the sum of its distances from two fixed points, called
+foci, is constant (see Figure 4.2). The longest and shortest lines that can be
+drawn through the center of an ellipse are called the major axis and minor axis,
+respectively. The <strong>semi-major axis</strong> is one-half of the major axis and
+represents a satellite&rsquo;s mean distance from its primary. <strong>Eccentricity</strong> is the
+distance between the foci divided by the length of the major axis and is a
+number between zero and one. An eccentricity of zero indicates a circle.</p>
+
+<p><strong>Inclination</strong> is the angular distance between a satellite&rsquo;s orbital plane and
+the equator of its primary (or the ecliptic plane in the case of heliocentric,
+or sun centered, orbits). An inclination of zero degrees indicates an orbit
+about the primary&rsquo;s equator in the same direction as the primary&rsquo;s rotation, a
+direction called <strong>prograde</strong> (or direct). An inclination of 90 degrees
+indicates a <strong>polar</strong> orbit. An inclination of 180 degrees indicates a
+retrograde equatorial orbit. A <strong>retrograde</strong> orbit is one in which a satellite
+moves in a direction opposite to the rotation of its primary.</p>
+
+<p><strong>Periapsis</strong> is the point in an orbit closest to the primary. The opposite of
+periapsis, the farthest point in an orbit, is called <strong>apoapsis</strong>. Periapsis and
+apoapsis are usually modified to apply to the body being orbited, such as
+perihelion and aphelion for the Sun, perigee and apogee for Earth, perijove and
+apojove for Jupiter, perilune and apolune for the Moon, etc. The argument of
+periapsis is the angular distance between the ascending node and the point of
+periapsis (see Figure 4.3). The time of periapsis passage is the time in which a
+satellite moves through its point of periapsis.</p>
+
+<p>Nodes are the points where an orbit crosses a plane, such as a satellite
+crossing the Earth&rsquo;s equatorial plane. If the satellite crosses the plane going
+from south to north, the node is the <strong>ascending node</strong>; if moving from north to
+south, it is the <strong>descending node</strong>. The <strong>longitude of the ascending node</strong> is
+the node&rsquo;s celestial longitude. Celestial longitude is analogous to longitude on
+Earth and is measured in degrees counter-clockwise from zero with zero longitude
+being in the direction of the vernal equinox.</p>
+
+<p>(4.1) $F = ma$</p>
+
+<p>(4.2) $F = G \left ( \frac{m_1m_2}{r^2} \right )$</p>
 
 <p>where $G = 6.67259x10^{-11} \frac{Nm^2}{kg^2}$</p>
 
@@ -67,7 +206,8 @@
 <div class="well">
 <h2>Problem 4.1</h2>
 
-<p>Calculate the velocity of an artificial satellite orbiting the Earth in a circular orbit at an altitude of 200 km above the Earth&rsquo;s surface.</p>
+<p>Calculate the velocity of an artificial satellite orbiting the Earth in a
+circular orbit at an altitude of 200 km above the Earth&rsquo;s surface.</p>
 
 <p>The radius of the earth is 6,378.14 km.</p>
 

@@ -12,6 +12,7 @@ import (
 
 var (
 	previewScript = `<script>
+console.log('preview enabled');
 new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
 	window.location = window.location;
 };
