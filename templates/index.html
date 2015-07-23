@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{ template "head" }}
+	</head>
+	<body>
+		<div class="container">
+			{{ template "nav" }}
+			<div>
+				<h2>Recent Posts</h2>
+				{{ range .Recent }}
+					<h3>
+						<a href="{{ url . }}">{{ .Meta.Title }}</a>
+						<small>Posted {{ displaytime .Meta.FileInfo.ModTime }}</small>
+					</h3>
+					<p>{{ .Meta.Summary }}</p>
+				{{ end }}
+			</div>
+			{{ template "footer" }}
+		</div>
+	</body>
+</html>
