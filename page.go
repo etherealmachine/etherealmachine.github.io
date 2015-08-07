@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/etherealmachine/blackfriday"
+	"github.com/etherealmachine/markdown"
 	"gopkg.in/yaml.v2"
 )
 
@@ -48,7 +48,5 @@ func parseMeta(buf []byte) ([]byte, *Meta, error) {
 }
 
 func parseContent(buf []byte) string {
-	return string(blackfriday.Markdown(buf,
-		blackfriday.HtmlRenderer(blackfriday.CommonHtmlFlags, "", ""),
-		blackfriday.CommonExtensions|blackfriday.EXTENSION_PARSE_DIV))
+	return markdown.Markdown(string(buf))
 }
