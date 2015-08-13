@@ -1,6 +1,7 @@
 title: Orbital Mechanics
 summary: A small workbook on orbital mechanics problems with runnable code.
 
+<!--table class="table table-bordered"-->
 This is a copy of Robert A. Braeunig's inestimable  <a
 href="http://www.braeunig.us/space/index.htm">Rocket & Space Technology</a>. I
 learn best by following examples, so I created a workbook where I could copy the
@@ -22,7 +23,7 @@ trajectories.
 <img
 		src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590"
 		width="500px"
-		class="pull-right">
+		class="pull-right" />
 
 A **conic section**, or just **conic**, is a curve formed by passing a plane
 through a right circular cone. As shown in Figure 4.1, the angular orientation
@@ -43,11 +44,12 @@ the type of conic section.
 
 <div class="pull-left">
 Conic Section | Eccentricity, e | Semi-Major Axis | Energy
-------------- | --------------- | --------------- | ------
+:------------ | :-------------: | :-------------: | :----:
 Circle        | 0               | = radius        | < 0
 Ellipse       | 0 < e < 1       | > 0             | < 0
 Parabola      | 1               | infinity        | 0
 Hyperbola     | > 1             | < 0             | > 0
+
 </div>
 
 <div class="clearfix"></div>
@@ -106,7 +108,7 @@ being in the direction of the vernal equinox.
 
 (4.1) $F = ma$
 
-(4.2) $F = G \left \( \frac{m_1m_2}{r^2} \right \)$
+(4.2) $F = G \left ( \frac{m_1m_2}{r^2} \right )$
 
 where $G = 6.67259x10^{-11} \frac{Nm^2}{kg^2}$
 
@@ -120,10 +122,11 @@ where $GM = 3.986005x10^{14} \frac{m^3}{s^2}$
 
 (4.6) $v = \sqrt{\frac{GM}{r}}$
 
-<div class="well">
-
-## Problem 4.1
-
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-1">
+    #### Problem 4.1
+  </div>
+  <div id="problem4-1" class="panel-body collapse">
 Calculate the velocity of an artificial satellite orbiting the Earth in a
 circular orbit at an altitude of 200 km above the Earth's surface.
 
@@ -135,8 +138,8 @@ var R*earth = 6378.14 * 1000; // meters
 var altitude*satellite = 200 * 1000; // meters
 var R*satellite = R*earth + altitude*satellite; v(R*satellite) / 1000 + " km/s";
 ```
-
-</div>
+  </div>
+</div> 
 
 (4.7) $\frac{GMm}{(R+r)^2} = m \omega^2 r$
 
@@ -178,9 +181,9 @@ r(86164.1) + " m";
 
 (4.17) $V*a = \sqrt{\frac{2GMR*p}{R*a(R*a+R_p)}}$
 
-(4.18) $R*a = \frac{R*p}{\left \( \frac{2GM}{R*pV*p^2} - 1 \right \)}$
+(4.18) $R*a = \frac{R*p}{\left ( \frac{2GM}{R*pV*p^2} - 1 \right )}$
 
-(4.19) $R*p = \frac{R*a}{\left \( \frac{2GM}{R*aV*a^2} - 1 \right \)}$
+(4.19) $R*p = \frac{R*a}{\left ( \frac{2GM}{R*aV*a^2} - 1 \right )}$
 
 ## Problem 4.4
 
@@ -204,11 +207,11 @@ A satellite in Earth orbit passes through its perigee point at an altitude of 20
 
 $V_p = 7850 m/s$
 
-$R\_p = R\_{earth} + 200 km$
+$R_p = R_{earth} + 200 km$
 
 want to find $R_a$
 
-(4.18) $R*a = \frac{R*p}{\left \( \frac{2GM}{R*pV*p^2} - 1 \right \)}$
+(4.18) $R_a = \frac{R_p}{\left ( \frac{2GM}{R_pV_p^2} - 1 \right )}$
 
 ```javascript
 function R_a(R_p, V_p) {
@@ -217,7 +220,7 @@ function R_a(R_p, V_p) {
 (R_a(R_earth + 200*1000, 7850) - R_earth) / 1000
 ```
 
-(4.20) $e = \frac{R*pV*p^2}{GM} - 1$
+(4.20) $e = \frac{R_pV_p^2}{GM} - 1$
 
 ## Problem 4.6
 
@@ -234,7 +237,7 @@ e(R_earth + 200*1000, 7850);
 
 (4.22) $R_a = a(1+e)$
 
-also note $R*p+R*a = 2a$
+also note $R_p+R_a = 2a$
 
 ## Problem 4.7
 
