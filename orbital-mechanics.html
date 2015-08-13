@@ -69,8 +69,7 @@ put forward his laws of motion and formulated his law of universal gravitation.
 The engineering applications of orbital mechanics include ascent trajectories,
 reentry and landing, rendezvous computations, and lunar and interplanetary
 trajectories.</p>
-<h2>Conic Sections</h2>
-<p><img src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590" width="500px" class="pull-right"/></p>
+<h2>Conic Sections</h2><img src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590" width="500px" class="pull-right"/></p>
 <p>A <strong>conic section</strong>, or just <strong>conic</strong>, is a curve formed by passing a plane
 through a right circular cone. As shown in Figure 4.1, the angular orientation
 of the plane relative to the cone determines whether the conic section is a
@@ -87,38 +86,38 @@ section is also related to the semi-major axis and the energy. The table below
 shows the relationships between eccentricity, semi-major axis, and energy and
 the type of conic section.</p>
 <div class="pull-left">
-	<table class="table table-bordered">
-		<tr>
-			<th>Conic Section</th>
-			<th>Eccentricity, e</th>
-			<th>Semi-Major Axis</th>
-			<th>Energy</th>
-		</tr>
-		<tr>
-			<td style="text-align: left;">Circle</td>
-			<td style="text-align: center;">0</td>
-			<td style="text-align: center;">= radius</td>
-			<td style="text-align: center;">&lt; 0</td>
-		</tr>
-		<tr>
-			<td style="text-align: left;">Ellipse</td>
-			<td style="text-align: center;">0 &lt; e &lt; 1</td>
-			<td style="text-align: center;">&gt; 0</td>
-			<td style="text-align: center;">&lt; 0</td>
-		</tr>
-		<tr>
-			<td style="text-align: left;">Parabola</td>
-			<td style="text-align: center;">1</td>
-			<td style="text-align: center;">infinity</td>
-			<td style="text-align: center;">0</td>
-		</tr>
-		<tr>
-			<td style="text-align: left;">Hyperbola</td>
-			<td style="text-align: center;">&gt; 1</td>
-			<td style="text-align: center;">&lt; 0</td>
-			<td style="text-align: center;">&gt; 0</td>
-		</tr>
-	</table>
+<table class="table table-bordered">
+	<tr>
+		<th>Conic Section</th>
+		<th>Eccentricity, e</th>
+		<th>Semi-Major Axis</th>
+		<th>Energy</th>
+	</tr>
+	<tr>
+		<td style="text-align: left;">Circle</td>
+		<td style="text-align: center;">0</td>
+		<td style="text-align: center;">= radius</td>
+		<td style="text-align: center;">&lt; 0</td>
+	</tr>
+	<tr>
+		<td style="text-align: left;">Ellipse</td>
+		<td style="text-align: center;">0 &lt; e &lt; 1</td>
+		<td style="text-align: center;">&gt; 0</td>
+		<td style="text-align: center;">&lt; 0</td>
+	</tr>
+	<tr>
+		<td style="text-align: left;">Parabola</td>
+		<td style="text-align: center;">1</td>
+		<td style="text-align: center;">infinity</td>
+		<td style="text-align: center;">0</td>
+	</tr>
+	<tr>
+		<td style="text-align: left;">Hyperbola</td>
+		<td style="text-align: center;">&gt; 1</td>
+		<td style="text-align: center;">&lt; 0</td>
+		<td style="text-align: center;">&gt; 0</td>
+	</tr>
+</table>
 </div>
 <div class="clearfix">
 </div>
@@ -176,20 +175,20 @@ being in the direction of the vernal equinox.</p>
 <p>(4.5) $F = \frac{mv^2}{r}$</p>
 <p>(4.6) $v = \sqrt{\frac{GM}{r}}$</p>
 <div class="panel panel-default">
-	<div class="panel-heading" data-toggle="collapse" href="#problem4-1">
-		<h4>Problem 4.1</h4>
-	</div>
-	<div id="problem4-1" class="panel-body collapse">
-		<p>Calculate the velocity of an artificial satellite orbiting the Earth in a
+<div class="panel-heading" data-toggle="collapse" href="#problem4-1">
+	<h4>Problem 4.1</h4>
+</div>
+<div id="problem4-1" class="panel-body collapse">
+	<p>Calculate the velocity of an artificial satellite orbiting the Earth in a
 circular orbit at an altitude of 200 km above the Earth&#39;s surface.</p>
-		<p>The radius of the earth is 6,378.14 km.</p>
-		<pre><code class="javascript">
+	<p>The radius of the earth is 6,378.14 km.</p>
+	<pre><code class="javascript">
 var GM = 3.986005e14; function v(r) { return Math.sqrt(GM/r); }
 var R*earth = 6378.14 * 1000; // meters
 var altitude*satellite = 200 * 1000; // meters
 var R*satellite = R*earth + altitude*satellite; v(R*satellite) / 1000 + &#34; km/s&#34;;
 </code></pre>
-	</div>
+</div>
 </div>
 <p>(4.7) $\frac{GMm}{(R+r)^2} = m \omega^2 r$</p>
 <p>(4.8) $GM = \omega^2 r^3$</p>
@@ -266,13 +265,11 @@ R_a = a*(1 + e);
 </code></pre>
 <p>Launch of a Space Vehicle The launch of a satellite or space vehicle consists
 -----------------------------------------------------------------------------</p>
-<p>of a period of powered flight during which the vehicle is lifted above the Earth&#39;s atmosphere and accelerated to orbital velocity by a rocket, or launch vehicle. Powered flight concludes at burnout of the rocket&#39;s last stage at which time the vehicle begins its free flight. During free flight the space vehicle is assumed to be subjected only to the gravitational pull of the Earth. If the vehicle moves far from the Earth, its trajectory may be affected by the gravitational influence of the sun, moon, or another planet.</p>
-<p><img src="https://docs.google.com/drawings/d/18NEGLWMyfpBlYb2wkPMpeuDxxpTEtE_G9IH-smdPCxw/pub?w=355&amp;h=282" class="pull-right"></p>
+<p>of a period of powered flight during which the vehicle is lifted above the Earth&#39;s atmosphere and accelerated to orbital velocity by a rocket, or launch vehicle. Powered flight concludes at burnout of the rocket&#39;s last stage at which time the vehicle begins its free flight. During free flight the space vehicle is assumed to be subjected only to the gravitational pull of the Earth. If the vehicle moves far from the Earth, its trajectory may be affected by the gravitational influence of the sun, moon, or another planet.</p><img src="https://docs.google.com/drawings/d/18NEGLWMyfpBlYb2wkPMpeuDxxpTEtE_G9IH-smdPCxw/pub?w=355&amp;h=282" class="pull-right"></p>
 <p>A space vehicle&#39;s orbit may be determined from the position and the velocity of the vehicle at the beginning of its free flight. A vehicle&#39;s position and velocity can be described by the variables $r$, $v$, and, $\gamma$ where $r$ is the vehicle&#39;s distance from the center of the Earth, $v$ is its velocity, and $\gamma$ is the angle between the position and the velocity vectors, called the zenith angle (see [Figure 4.7](/fig4-7.gif)). If we let $r*1$, $v*1$, and $\gamma*1$ be the initial (launch) values of $r$, $v$, and $\gamma$, then we may consider these as given quantities. If we let point $P*2$ represent the perigee, then equation (4.13) becomes</p>
 <p>(4.23) $v*2 = V*p = \frac{r*1v*1\sin{\gamma*1}}{R*p}$</p>
 <p>Substituting equation (4.23) into (4.15), we can obtain an equation for the perigee radius $R_p$.</p>
-<p>(4.24) $$
-</p>
+<p>(4.24) $$</p>
 			</div>
 			<div class="clearfix"></div>
 			

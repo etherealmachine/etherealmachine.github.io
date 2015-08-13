@@ -1,7 +1,11 @@
 title: Resume
 summary: A brief summary of my technical achievements, abilities, and qualifications.
 
-<pre class="pull-left"> James Pettit &lt;james.l.pettit@gmail.com&gt; https://github.com/etherealmachine Santa Cruz, CA</pre><div class="clearfix"></div>
+<pre class="pull-left"><code class="nohighlight">James Pettit
+\<james.l.pettit@gmail.com\>
+https://github.com/etherealmachine
+Santa Cruz, CA</code></pre>
+<div class="clearfix"></div>
 
 ### Qualifications
 
