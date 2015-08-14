@@ -1,6 +1,7 @@
 title: Orbital Mechanics
 summary: A small workbook on orbital mechanics problems with runnable code.
 
+<script src="js/emit.js"></script>
 <!--table class="table table-bordered"-->
 This is a copy of Robert A. Braeunig's inestimable  <a
 href="http://www.braeunig.us/space/index.htm">Rocket & Space Technology</a>. I
@@ -133,10 +134,14 @@ circular orbit at an altitude of 200 km above the Earth's surface.
 The radius of the earth is 6,378.14 km.
 
 ```javascript
-var GM = 3.986005e14; function v(r) { return Math.sqrt(GM/r); }
-var R*earth = 6378.14 * 1000; // meters
-var altitude*satellite = 200 * 1000; // meters
-var R*satellite = R*earth + altitude*satellite; v(R*satellite) / 1000 + " km/s";
+var GM = 3.986005e14;
+function v(r) {
+  return Math.sqrt(GM/r);
+}
+var R_earth = 6378.14 * 1000; // meters
+var altitude_satellite = 200 * 1000; // meters
+var R_satellite = R_earth + altitude_satellite;
+emit("velocity: %.2f km/s", v(R_satellite) / 100);
 ```
   </div>
 </div> 
@@ -147,35 +152,44 @@ var R*satellite = R*earth + altitude*satellite; v(R*satellite) / 1000 + " km/s";
 
 (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$
 
-## Problem 4.2
-
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-2">
+    #### Problem 4.2
+  </div>
+  <div id="problem4-2" class="panel-body collapse">
 Calculate the period of revolution for the satellite in problem 4.1.
 
 ```javascript
 function p(r) {
   return Math.sqrt((4 * Math.pow(Math.PI, 2) * Math.pow(r, 3)) / GM);
 }
-p(R_satellite) + " s";
+emit("period: %d seconds", p(R_satellite));
 ```
+  </div>
+</div>
 
-## Problem 4.3
-
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-3">
+    #### Problem 4.3
+  </div>
+  <div id="problem4-3" class="panel-body collapse">
 Calculate the radius of orbit for a Earth satellite in a geosynchronous orbit, where the Earth's rotational period is 86,164.1 seconds.
 
-(4.9) $p^2 = \frac{4\pi^2r^3}{GM}$
+Recall from (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$. We want $r$ in terms of $p$.
 
-We want $r$ in terms of $p$.
-
-$p^2 GM = 4\pi^2r^3$
-
-$\frac{p^2 GM}{4\pi^2} = r^3$
+1. $p^2 = \frac{4\pi^2r^3}{GM}$
+2. $p^2 GM = 4\pi^2r^3$
+3. $\frac{p^2 GM}{4\pi^2} = r^3$
+4. $r = \sqrt[3]{\frac{p^2 GM}{4\pi^2}}$
 
 ```javascript
 function r(p) {
   return Math.cbrt((Math.pow(p, 2) * GM) / (4 * Math.pow(Math.PI, 2)));
 }
-r(86164.1) + " m";
+emit("radius: %.2f meters", r(86164.1));
 ```
+  </div>
+</div>
 
 (4.16) $V*p = \sqrt{\frac{2GMR*a}{R*p(R*a+R_p)}}$
 
