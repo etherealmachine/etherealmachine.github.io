@@ -7,12 +7,13 @@
 		<div class="container">
 			{{ template "nav" . }}
 			<div>
-				<h2>Recent Posts</h2>
+				<p></p>
+				<h3>Recent Posts</h3>
 				{{ range .Recent }}
-					<h3>
+					<h4>
 						<a href="{{ url . }}">{{ .Meta.Title }}</a>
-						<small>Posted {{ displaytime .Meta.FileInfo.ModTime }}</small>
-					</h3>
+						<small>Posted {{ displaytime .Meta.Date }}</small>
+					</h4>
 					<p>{{ .Meta.Summary }}</p>
 				{{ end }}
 			</div>

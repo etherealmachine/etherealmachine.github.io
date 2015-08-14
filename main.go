@@ -10,6 +10,7 @@ import (
 	"sort"
 	"strings"
 	"text/template"
+	"time"
 
 	"github.com/etherealmachine/markdown"
 	"gopkg.in/yaml.v2"
@@ -25,10 +26,12 @@ type Site struct {
 }
 
 type Meta struct {
-	Title    string
-	Summary  string
-	Path     string
-	FileInfo os.FileInfo
+	Title     string
+	Summary   string
+	Published bool
+	Date      time.Time
+	Path      string
+	FileInfo  os.FileInfo
 }
 
 type Page struct {
@@ -44,12 +47,12 @@ type generator struct {
 	template *template.Template
 }
 
-type ByModTime []*Page
+type ByTime []*Page
 
-func (a ByModTime) Len() int      { return len(a) }
-func (a ByModTime) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
-func (a ByModTime) Less(i, j int) bool {
-	return a[i].Meta.FileInfo.ModTime().Before(a[j].Meta.FileInfo.ModTime())
+func (a ByTime) Len() int      { return len(a) }
+func (a ByTime) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+func (a ByTime) Less(i, j int) bool {
+	return a[i].Meta.Date.Before(a[j].Meta.Date)
 }
 
 func (g *generator) generatePageContent() {
@@ -71,21 +74,22 @@ func (g *generator) walk() error {
 
 func (g *generator) visit(path string, fileInfo os.FileInfo, err error) error {
 	if strings.HasSuffix(path, ".md") {
-		page, err := g.generatePage(path, fileInfo)
+		err := g.generatePage(path, fileInfo)
 		if err != nil {
 			g.errors = append(g.errors, err)
 			return nil
 		}
-		g.pages[path] = page
 	}
 	return nil
 }
 
 func (g *generator) gatherSiteData() {
 	for _, page := range g.pages {
-		g.site.Recent = append(g.site.Recent, page)
+		if page.Meta.Published {
+			g.site.Recent = append(g.site.Recent, page)
+		}
 	}
-	sort.Sort(ByModTime(g.site.Recent))
+	sort.Sort(ByTime(g.site.Recent))
 	if len(g.site.Recent) > 4 {
 		g.site.Recent = g.site.Recent[:5]
 	}
@@ -110,31 +114,41 @@ func (g *generator) generatePages() error {
 	return nil
 }
 
-func (g *generator) generatePage(path string, fileInfo os.FileInfo) (*Page, error) {
+func (g *generator) generatePage(path string, fileInfo os.FileInfo) error {
 	buf, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	buf, meta, err := parseMeta(buf)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	meta.Path = path
 	meta.FileInfo = fileInfo
-	return &Page{
+	if meta.Date.IsZero() {
+		meta.Date = meta.FileInfo.ModTime()
+	}
+	g.pages[path] = &Page{
 		Site:    g.site,
 		Meta:    meta,
 		Content: parseContent(buf),
-	}, nil
+	}
+	return nil
 }
 
 func parseMeta(buf []byte) ([]byte, *Meta, error) {
 	var meta Meta
+	var metaBytes []byte
 	end := bytes.Index(buf, []byte("\n\n"))
-	if err := yaml.Unmarshal(buf[:end], &meta); err != nil {
+	if end > 0 {
+		metaBytes = buf[:end]
+	} else {
+		metaBytes = buf
+	}
+	if err := yaml.Unmarshal(metaBytes, &meta); err != nil {
 		return nil, nil, err
 	}
-	return buf[end:], &meta, nil
+	return buf[len(metaBytes):], &meta, nil
 }
 
 func parseContent(buf []byte) string {

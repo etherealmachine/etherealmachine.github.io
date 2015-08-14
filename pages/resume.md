@@ -1,5 +1,6 @@
 title: Resume
 summary: A brief summary of my technical achievements, abilities, and qualifications.
+published: true
 
 <pre class="pull-left"><code class="nohighlight">James Pettit
 \<james.l.pettit@gmail.com\>
@@ -15,7 +16,7 @@ Frameworks: `AngularJS, AppEngine, Android, Polymer, React`
 
 Systems: `BigTable, Hadoop, Redis, Datastore, ZeroMQ`
 
-### Software Engineer @ Google, Inc. <small>December 2012 - Present</small>
+### Software Engineer @ Google, Inc. <small>2012 - Present</small>
 
 On the team responsible for scaling Google support for millions of customers. Systems include:
 
@@ -23,7 +24,7 @@ On the team responsible for scaling Google support for millions of customers. Sy
 *	PubSub based automated processing related to order management, automated robot-customer interactions, and batch processing jobs.
 *	Internal auditing, authentication, and authorization of customer support requests.
 
-### Lead Programmer @ LEEPS Lab <small>January 2007 - December 2012 (6 years)</small>
+### Lead Programmer @ LEEPS Lab <small>2007 - 2012</small>
 
 *	Published two Open Source frameworks for Experimental Economics
 *	Pettit, Friedman, Kephart, and Oprea. "Software for continuous game experiments". Experimental Economics Vol. 17, Issue 4.
@@ -36,7 +37,7 @@ On the team responsible for scaling Google support for millions of customers. Sy
 	*	Web-based frontend allowing HTML5 web development knowledge to be used to develop experimental software.
 	*	Soft real-time backend written in Go using a Redis datastore.
 
-### M.S. Computer Science, UC Santa Cruz <small>September 2009 - December 2011 (2 years 4 months)</small>
+### M.S. Computer Science, UC Santa Cruz <small>2011</small>
 
 *	Focus on machine learning and artificial intelligence.
 *	Developed advancement to Monte-Carlo Tree Search using Evolutionary Algorithms to bias the Monte Carlo simulation.
@@ -45,7 +46,7 @@ On the team responsible for scaling Google support for millions of customers. Sy
 	*	[Full PDF](https://users.soe.ucsc.edu/~dph/mypubs/hex-FDG12.pdf)
 	*	https://github.com/etherealmachine/hivemind
 
-### B.S. Computer Science, UC Santa Cruz <small>2003 - 2007 (4 years)</small>
+### B.S. Computer Science, UC Santa Cruz <small>2007</small>
 
 ### Professional Interests
 

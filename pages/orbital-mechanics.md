@@ -1,5 +1,6 @@
 title: Orbital Mechanics
 summary: A small workbook on orbital mechanics problems with runnable code.
+date: 2015-08-13T00:00:00Z
 
 <script src="/js/emit.js"></script>
 <!--table class="table table-bordered"-->
@@ -106,6 +107,56 @@ south, it is the **descending node**. The **longitude of the ascending node** is
 the node's celestial longitude. Celestial longitude is analogous to longitude on
 Earth and is measured in degrees counter-clockwise from zero with zero longitude
 being in the direction of the vernal equinox.
+
+In general, three observations of an object in orbit are required to calculate
+the six orbital elements. Two other quantities often used to describe orbits are
+period and true anomaly. *Period*, $P$, is the length of time required for a
+satellite to complete one orbit. *True anomaly*, $\nu$, is the angular distance
+of a point in an orbit past the point of periapsis, measured in degrees.
+
+### Types Of Orbits
+
+For a spacecraft to achieve Earth orbit, it must be launched to an elevation
+above the Earth's atmosphere and accelerated to orbital velocity. The most
+energy efficient orbit, that is one that requires the least amount of
+propellant, is a direct low inclination orbit. To achieve such an orbit, a
+spacecraft is launched in an eastward direction from a site near the Earth's
+equator. The advantage being that the rotational speed of the Earth contributes
+to the spacecraft's final orbital speed. At the United States' launch site in
+Cape Canaveral (28.5 degrees north latitude) a due east launch results in a
+"free ride" of 1,471 km/h (914 mph). Launching a spacecraft in a direction other
+than east, or from a site far from the equator, results in an orbit of higher
+inclination. High inclination orbits are less able to take advantage of the
+initial speed provided by the Earth's rotation, thus the launch vehicle must
+provide a greater part, or all, of the energy required to attain orbital
+velocity. Although high inclination orbits are less energy efficient, they do
+have advantages over equatorial orbits for certain applications. Below we
+describe several types of orbits and the advantages of each:
+
+**Geosynchronous orbits** (Geo) are circular orbits around the Earth having a
+period of 24 hours. A geosynchronous orbit with an inclination of zero degrees
+is called a *geostationary orbit*. A spacecraft in a geostationary orbit appears
+to hang motionless above one position on the Earth's equator. For this reason,
+they are ideal for some types of communication and meteorological satellites. A
+spacecraft in an inclined geosynchronous orbit will appear to follow a regular
+figure-8 pattern in the sky once every orbit. To attain geosynchronous orbit, a
+spacecraft is first launched into an elliptical orbit with an apogee of 35,786
+km (22,236 miles) called a *geosynchronous transfer orbit* (GTO). The orbit is
+then circularized by firing the spacecraft's engine at apogee.
+
+**Polar orbits** (PO) are orbits with an inclination of 90 degrees. Polar orbits
+are useful for satellites that carry out mapping and/or surveillance operations
+because as the planet rotates the spacecraft has access to virtually every point
+on the planet's surface.
+
+**Walking orbits**: An orbiting satellite is subjected to a great many
+gravitational influences. First, planets are not perfectly spherical and they
+have slightly uneven mass distribution. These fluctuations have an effect on a
+spacecraft's trajectory. Also the sun, moon, and planets contribute a
+gravitational influence on an orbiting satellite. With proper planning it is
+possible to design an orbit which takes advantage of these influences to induce
+a precession in the satellite's orbital plane. The resulting orbit is called a
+*walking orbit*, or a precessing orbit.
 
 (4.1) $F = ma$
 

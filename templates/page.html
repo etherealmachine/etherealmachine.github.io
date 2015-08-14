@@ -7,7 +7,7 @@
 		<div class="container">
 			{{ template "nav" . }}
 			<h3><a href="{{ url . }}">{{ .Meta.Title }}</a>
-				<small>Posted {{ displaytime .Meta.FileInfo.ModTime }}</small>
+				<small>Posted {{ displaytime .Meta.Date }}</small>
 			</h3>
 			<div class="content">
 				{{ .Content }}
