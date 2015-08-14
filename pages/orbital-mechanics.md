@@ -1,7 +1,7 @@
 title: Orbital Mechanics
 summary: A small workbook on orbital mechanics problems with runnable code.
 
-<script src="js/emit.js"></script>
+<script src="/js/emit.js"></script>
 <!--table class="table table-bordered"-->
 This is a copy of Robert A. Braeunig's inestimable  <a
 href="http://www.braeunig.us/space/index.htm">Rocket & Space Technology</a>. I
