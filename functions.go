@@ -1,9 +1,9 @@
 package main
 
 import (
+	"path/filepath"
+	"strings"
 	"time"
-
-	"github.com/extemporalgenome/slug"
 )
 
 var (
@@ -18,5 +18,8 @@ func displaytime(t time.Time) string {
 }
 
 func url(p *Page) string {
-	return slug.Slug(p.Meta.Title) + ".html"
+	if filepath.Ext(p.Meta.Path) == ".md" {
+		return strings.Replace(p.Meta.Path, ".md", ".html", 1)
+	}
+	return p.Meta.Path
 }
