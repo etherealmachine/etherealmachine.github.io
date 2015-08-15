@@ -100,7 +100,12 @@ func (g *generator) generateIndex() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	g.template.ExecuteTemplate(f, "index.html", g.site)
+	g.template.ExecuteTemplate(f, "index.html", &Page{
+		Site: g.site,
+		Meta: &Meta{
+			Title: "etherealmachine.github.io",
+		},
+	})
 }
 
 func (g *generator) generatePages() error {
