@@ -158,11 +158,79 @@ possible to design an orbit which takes advantage of these influences to induce
 a precession in the satellite's orbital plane. The resulting orbit is called a
 *walking orbit*, or a precessing orbit.
 
+**Sun synchronous orbits** (SSO) are walking orbits whose orbital plane
+precesses with the same period as the planet's solar orbit period. In such an
+orbit, a satellite crosses periapsis at about the same local time every orbit.
+This is useful if a satellite is carrying instruments which depend on a certain
+angle of solar illumination on the planet's surface. In order to maintain an
+exact synchronous timing, it may be necessary to conduct occasional propulsive
+maneuvers to adjust the orbit.
+
+**Molniya orbits** are highly eccentric Earth orbits with a period of
+approximately 12 hours (2 revolutions per day). The orbital inclination is
+chosen so the rate of change of perigee is zero, thus both apogee and perigee
+can be maintained over fixed latitudes. This condition occurs at inclinations of
+63.4 and 116.6 degrees. For these orbits the argument of perigee is typically
+placed in the southern hemisphere, so the satellite remains above the northern
+hemisphere near apogee for approximately 11 hours per orbit. This orientation
+can provide good ground coverage at high northern latitudes.
+
+**Hohmann transfer orbits** are interplanetary trajectories whose advantage is
+that they consume the least possible amount of propellant. A Hohmann transfer
+orbit to an outer planet, such as Mars, is achieved by launching a spacecraft
+and accelerating it in the direction of Earth's revolution around the sun until
+it breaks free of the Earth's gravity and reaches a velocity which places it in
+a sun orbit with an aphelion equal to the orbit of the outer planet. Upon
+reaching its destination, the spacecraft must decelerate so that the planet's
+gravity can capture it into a planetary orbit
+
+To send a spacecraft to an inner planet, such as Venus, the spacecraft is
+launched an accelerated in the direction opposite of Earth's revolution around
+the sun (i.e. decelerated) until it achieves a sun orbit with a perihelion equal
+to the orbit of the inner planet. It should be noted that the spacecraft
+continues to move in the same direction as Earth, only more slowly.
+
+To reach a planet requires that the spacecraft be inserted into an
+interplanetary trajectory at the correct time so that the spacecraft arrives at
+the planet's orbit when the planet will be at the point where the spacecraft
+will intercept it. This task is comparable to a quarterback "leading" his
+receiver so that the football and receiver arrive at the same point at the same
+time. The interval of time in which a spacecraft must be launched in order to
+complete its mission is called a *launch window*.
+
+### Newton's Laws of Motion and Universal Gravitation
+
+*Newton's laws of motion* describe the relationship between the motion of a
+particle and the forces acting on it.
+
+The first law states that if no forces are acting, a body at rest will remain at
+rest, and a body in motion will remain in motion in a straight line. Thus, if no
+forces are acting, the velocity (both magnitude and direction) will remain
+constant.
+
+The second law tells us that if a force is applied there will be a change in
+velocity, i.e. an acceleration, proportional to the magnitude of the force and
+in the direction in which the force is applied. This law may be summarized by
+the equation
+
 (4.1) $F = ma$
+
+where $F$ is the force, $m$ is the mass of the particle, and $a$ is the
+acceleration.
+
+The third law states that if body 1 exerts a force on body 2, then body 2 will
+exert a force of equal strength, but opposite in direction, on body 1. This law
+is commonly stated, "for every action there is an equal and opposite reaction".
+
+In his *law of universal gravitation*, Newton states that two particles having
+masses $m_1$ and $m_2$ and separated by a distance $r$ are attracted to each
+other with equal and opposite forces directed along the line joining the
+particles. The common magnitude $F$ of the two forces is
 
 (4.2) $F = G \left ( \frac{m_1m_2}{r^2} \right )$
 
-where $G = 6.67259x10^{-11} \frac{Nm^2}{kg^2}$
+where $G$ is an universal constant, called the constant of gravitation, and has
+the value $6.67259x10^{-11} \frac{Nm^2}{kg^2}$.
 
 (4.3) $g = \frac{GM}{r^2}$
 
