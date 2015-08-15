@@ -447,18 +447,85 @@ kilometers. On the other hand, the Moon's distance from the barycenter ($r$) is
 379,732 km, with Earth's counter-orbit ($R$) taking up the difference of 4,671 km.
 </div>
 
-(4.16) $V*p = \sqrt{\frac{2GMR*a}{R*p(R*a+R_p)}}$
+Kepler's second law of planetary motion must, of course, hold true for circular
+orbits. In such orbits both $\omega$ and $r$ are constant so that equal areas
+are swept out in equal times by the line joining a planet and the sun. For
+elliptical orbits, however, both $\omega$ and $r$ will vary with time. Let's now
+consider this case.
 
-(4.17) $V*a = \sqrt{\frac{2GMR*p}{R*a(R*a+R_p)}}$
+Figure 4.5 shows a particle revolving around $C$ along some arbitrary path. The
+area swept out by the radius vector in a short time interval $\Delta t$ is shown
+shaded. This area, neglecting the small triangular region at the end, is
+one-half the base times the height or approximately $\frac{r(r\omega\Delta t)}
+{2}$. This expression becomes more exact as $\Delta t$ approaches zero, i.e. the
+small triangle goes to zero more rapidly than the large one. The rate at which
+area is being swept out instantaneously is therefore
 
-(4.18) $R*a = \frac{R*p}{\left ( \frac{2GM}{R*pV*p^2} - 1 \right )}$
+(4.10) $\lim_{t \to 0} \left [ \frac{r(r \omega \Delta t)}{2} \right ] = \frac
+{\omega r^2} {2}$
 
-(4.19) $R*p = \frac{R*a}{\left ( \frac{2GM}{R*aV*a^2} - 1 \right )}$
+For any given body moving under the influence of a central force, the value
+$\omega r^2$ is constant.
 
-## Problem 4.4
+Let's now consider two points, $P_1$ and $P_2$ in an orbit with radii $r_1$ and
+$r_2$, and velocities $v_1$ and $v_2$. Since the velocity is always tangent to
+the path, it can be seen that if $\gamma$ is the angle between $r$ and $v$,
+then
 
+(4.11) $v\sin \gamma = \omega r$
+
+where $v\sin \gamma$ is the transverse component of $v$. Multiplying through by
+$r$, we have
+
+(4.12) $rv\sin\gamma = \omega r^2 = \text{Constant}$
+
+or, for two points $P_1$ and $P_1$ on the orbital path
+
+(4.13) $r_1v_1\sin\gamma_1 = r_2v_2\sin\gamma_2$
+
+Note that at periapsis and apoapsis, $\gamma = \text{90 degrees}$. Thus, letting
+$P_1$ and $P_2$ be these two points we get
+
+(4.14) $R_pV_p = R_aV_a$
+
+Let's now look at the energy of the above particle at points $P_1$ and $P_2$.
+*Conservation of energy* states that the sum of the kinetic energy and the
+potential energy of a particle remains constant. The kinetic energy $T$ of a
+particle is given by $\frac{mv^2}{2}$ while the potential energy of gravity $V$
+is calculated by the equation $-\frac{GMm}{r}$. Applying the conservation of
+energy we have
+
+$T_1 + V_1 = T_2 + V_2$, or
+
+$\frac{mv_1^2}{2} - \frac{GMm}{r_1} = \frac{mv_2^2}{2} - \frac{GMm}{r_2}$, or
+
+(4.15) $v_2^2 - v_1^2 = 2GM\left(\frac{1}{r_2} - \frac{1}{r_1}\right)$
+
+From equations (4.14) and (4.15) we obtain
+
+(4.16) $V_p = \sqrt{\frac{2GMR_a}{R_p(R_a+R_p)}}$, and
+
+(4.17) $V_a = \sqrt{\frac{2GMR*p}{R_a(R_a+R_p)}}$
+
+Rearranging terms we get
+
+(4.18) $R_a = \frac{R_p}{\left ( \frac{2GM}{R_pV_p^2} - 1 \right )}$, and
+
+(4.19) $R_p = \frac{R_a}{\left ( \frac{2GM}{R_aV_a^2} - 1 \right )}$
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-4">
+    #### Problem 4.4
+  </div>
+  <div id="problem4-4" class="panel-body collapse">
 An artificial Earth satellite is in an elliptical orbit which brings it to an altitude of 250 km at perigee and out to an altitude of 500 km at apogee. Calculate the velocity of the satellite at both perigee and apogee.
 
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-4">
+      Show solution
+    </button>
+    <div id="solution4-4" class="collapse">
 ```javascript
 function V_p(R_a, R_p) {
   return Math.sqrt((2 * GM * R_a) / (R_p * (R_a + R_p)));
@@ -468,13 +535,26 @@ function V_a(R_a, R_p) {
 };
 R_a = 500*1000 + R_earth;
 R_p = 250*1000 + R_earth;
-[V_p(R_a, R_p) + " m/s", V_a(R_a, R_p) + " m/s"];
+emit("V_p: %d m/s", V_p(R_a, R_p));
+emit("V_a: %d m/s", V_a(R_a, R_p));
 ```
+    </div>
+  </div>
+</div>
 
-## Problem 4.5
-
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-5">
+    #### Problem 4.5
+  </div>
+  <div id="problem4-5" class="panel-body collapse">
 A satellite in Earth orbit passes through its perigee point at an altitude of 200 km above the Earth's surface and at a velocity of 7,850 m/s. Calculate the apogee altitude of the satellite.
 
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-5">
+      Show solution
+    </button>
+    <div id="solution4-5" class="collapse">
 $V_p = 7850 m/s$
 
 $R_p = R_{earth} + 200 km$
@@ -487,8 +567,13 @@ want to find $R_a$
 function R_a(R_p, V_p) {
   return R_p / (((2*GM)/(R_p*Math.pow(V_p, 2))) - 1);
 }
-(R_a(R_earth + 200*1000, 7850) - R_earth) / 1000
+emit(
+  "Altitude @ apogee = %.1f km",
+  (R_a(R_earth + 200*1000, 7850) - R_earth) / 1000);
 ```
+    </div>
+  </div>
+</div>
 
 (4.20) $e = \frac{R_pV_p^2}{GM} - 1$
 

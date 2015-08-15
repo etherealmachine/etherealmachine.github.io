@@ -16,9 +16,10 @@ function fmt(fmtString, vals) {
 		} else if (verb == "f") {
 			value = new String(value);
 			if (precision) {
+				precision = parseInt(precision);
 				var sep = value.indexOf(".");
-				if (sep > 0) {
-					value = value.substring(0, sep+3);
+				if (sep >= 0) {
+					value = value.substring(0, sep+precision+1);
 				}
 			}
 		} else if (verb != "s") {
