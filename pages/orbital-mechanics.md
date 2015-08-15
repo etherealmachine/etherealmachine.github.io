@@ -229,16 +229,61 @@ particles. The common magnitude $F$ of the two forces is
 
 (4.2) $F = G \left ( \frac{m_1m_2}{r^2} \right )$
 
-where $G$ is an universal constant, called the constant of gravitation, and has
-the value $6.67259x10^{-11} \frac{Nm^2}{kg^2}$.
+where $G$ is an universal constant, called the *constant of gravitation*, and
+has the value $6.67259x10^{-11} \frac{Nm^2}{kg^2}$.
+
+Let's now look at the force that the Earth exerts on an object. If the object
+has a mass $m$, and the Earth has a mass $M$, and the object's distance from the
+center of the Earth is $r$, then the forst that the Earth exerts on the object
+is $\frac{GmM}{r^2}$. If we drop the object, the Earth's gravity will cause it
+to accelerate toward the center of the Earth. By Newton's second law ($F = ma$),
+this acceleration $g$ must equal $\frac{\frac{GmM}{r^2}}{m}$, or
 
 (4.3) $g = \frac{GM}{r^2}$
 
-where $GM = 3.986005x10^{14} \frac{m^3}{s^2}$
+At the surface of the earth, this acceleration has the value $9.80665 \frac{m}{s^2}$.
+
+Many of the upcoming computations will be somewhat simplified if we express the
+product $GM$ as a constant, which for Earth has the value $3.986005x10^{14}\frac{m^3}{s^2}$.
+The product GM is often represented by the Greek letter $\mu$.
+
+For additional useful constants please see the appendix [Basic Constants](http://www.braeunig.us/space/constant.htm).
+
+For a refresher on SI versus U.S. units see the appendix [Weights & Measures](http://www.braeunig.us/space/units.htm).
+
+### Uniform Circular Motion
+
+In the simple case of free fall, a particle accelerates toward the center of the
+Earth while moving in a straight line. The velocity of the particle changes in
+magnitude, but not in direction. In the case of uniform circular motion a
+particle moves in a circle with constant speed. The velocity of the particle
+changes continuously in direction, but not in magnitude. From Newton's laws we
+see that since the direction of the velocity is changing, there is an
+acceleration. This acceleration, called *centripetal acceleration* is directed
+inward toward the center of the circle and is given by
 
 (4.4) $a = \frac{v^2}{r}$
 
+where $v$ is the speed of the particle and $r$ is the radius of the circle.
+Every accelerating particle must have a force acting on it, defined by Newton's
+second law ($F = ma$). Thus, a particle undergoing uniform circular motion is
+under the influence of a force, called *centripetal force*, whose magnitude is
+given by
+
 (4.5) $F = \frac{mv^2}{r}$
+
+The direction of $F$ at any instant must be in the direction of $a$ at the same
+instant, that is radially inward.
+
+A satellite in orbit is acted on only by the forces of gravity. The inward
+acceleration which causes the satellite to move in a circular orbit is the
+gravitational acceleration caused by the body around which the satellite orbits.
+Hence, the satellite's centripetal acceleration is $g$, that is $g = \frac{v^2}
+{r}$. From Newton's law of universal gravitation we know that $g = \frac{GM}
+{r^2}$. Therefore, by setting these equations equal to one another we find that,
+for a circular orbit,
+
+$\frac{v^2}{r} = \frac{GM}{r^2}$, or 
 
 (4.6) $v = \sqrt{\frac{GM}{r}}$
 
@@ -250,8 +295,14 @@ where $GM = 3.986005x10^{14} \frac{m^3}{s^2}$
 Calculate the velocity of an artificial satellite orbiting the Earth in a
 circular orbit at an altitude of 200 km above the Earth's surface.
 
-The radius of the earth is 6,378.14 km.
+Note that the radius of the earth is 6,378.14 km.
 
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-1">
+      Show solution
+    </button>
+    <div id="solution4-1" class="collapse">
 ```javascript
 var GM = 3.986005e14;
 function v(r) {
@@ -260,16 +311,72 @@ function v(r) {
 var R_earth = 6378.14 * 1000; // meters
 var altitude_satellite = 200 * 1000; // meters
 var R_satellite = R_earth + altitude_satellite;
-emit("velocity: %.2f km/s", v(R_satellite) / 100);
+emit("velocity: %d m/s", v(R_satellite));
 ```
+    </div>
   </div>
 </div> 
 
+### Motions of Planets and Satellites
+
+Through a lifelong study of the motions of bodies in the solar system, Johannes
+Kepler (1571-1630) was able to derive three basic laws known as *Kepler's laws
+of planetary motion*. Using the data compiled by his mentor Tycho Brahe
+(1546-1601), Kepler found the following regularities after years of laborious
+calculations:
+
+1. All planets move in elliptical orbits with the sun at one focus.
+2. A line joining any planet to the sun sweeps out equal areas in equal times.
+3. The square of the period of any planet about the sun is proportional to the
+cube of the planet's mean distance from the sun.
+
+These laws can be deduced from Newton's laws of motion and law of universal
+gravitation. Indeed, Newton used Kepler's work as basic information in the
+formulation of his gravitational theory.
+
+As Kepler pointed out, all planets move in elliptical orbits, however, we can
+learn much about planetary motion by considering the special case of circular
+orbits. We shall neglect the forces between planets, considering only a planet's
+interaction with the sun. These consideration apply equally well to the motion
+of a satellite about a planet.
+
+Let's examine the case of two bodies of masses $M$ and $m$ moving in circular
+orbits under the influence of each other's gravitational attraction. The center
+of mass of this system of two bodies lies along the line joining them at a point
+$C$ such that $mr = MR$. The large body of mass $M$ moves in an orbit of
+constant radius $R$ and the small body of mass $m$ in an orbit of constant
+radius $r$, both having the same angular velocity $\omega$. For this to happen,
+the gravitational force acting on each body must provide the necessary
+centripetal acceleration. Since these gravitational forces are a simple
+action-reaction pair, the centripetal forces must be equal but opposite in
+direction. That is, $m\omega^2r$ must equal $M\omega^2R$. The specific
+requirement then, is that the gravitational force acting on either body must
+equal the centripetal force needed to keep it moving in its circular orbit, that
+is
+
 (4.7) $\frac{GMm}{(R+r)^2} = m \omega^2 r$
+
+If one body has a much greater mass than the other, as is the case of the sun
+and a planet or the Earth and a satellite, its distance from the center of mass
+is much smaller than that other body. If we assume that $m$ is negligible
+compared to $M$, then $R$ is negligible compared to $r$. Thus, equation (4.7)
+becomes
 
 (4.8) $GM = \omega^2 r^3$
 
+If we express the angular velocity in terms of the period of revolution,
+$\omega = \frac{2\pi}{P}$, we obtain
+
+$GM = \frac{4\pi^2r^3}{p^2}$, or
+
 (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$
+
+where $P$ is the period of revolution. This is a basic equation of planetary and
+satellite motion. It also holds for elliptical orbits if we define $r$ to be the
+semi-major axis ($a$) of the orbit.
+
+A significant consequence of this equation is that it predicts Kepler's third
+law of planetary motion, that is $p^2 \sim r^3$.
 
 <div class="panel panel-default">
   <div class="panel-heading" data-toggle="collapse" href="#problem4-2">
@@ -278,12 +385,19 @@ emit("velocity: %.2f km/s", v(R_satellite) / 100);
   <div id="problem4-2" class="panel-body collapse">
 Calculate the period of revolution for the satellite in problem 4.1.
 
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-2">
+      Show solution
+    </button>
+    <div id="solution4-2" class="collapse">
 ```javascript
 function p(r) {
   return Math.sqrt((4 * Math.pow(Math.PI, 2) * Math.pow(r, 3)) / GM);
 }
 emit("period: %d seconds", p(R_satellite));
 ```
+    </div>
   </div>
 </div>
 
@@ -301,13 +415,36 @@ Recall from (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$. We want $r$ in terms of $p$.
 3. $\frac{p^2 GM}{4\pi^2} = r^3$
 4. $r = \sqrt[3]{\frac{p^2 GM}{4\pi^2}}$
 
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-3">
+      Show solution
+    </button>
+    <div id="solution4-3" class="collapse">
 ```javascript
 function r(p) {
   return Math.cbrt((Math.pow(p, 2) * GM) / (4 * Math.pow(Math.PI, 2)));
 }
-emit("radius: %.2f meters", r(86164.1));
+emit("radius: %d meters", r(86164.1));
 ```
+    </div>
   </div>
+</div>
+
+<div class="well">
+In celestial mechanics where we are dealing with planetary or stellar sized bodies, it is often the case that the mass of the secondary body is significant in relation to the mass of the primary, as with the Moon and Earth. In this case the size of the secondary cannot be ignored. The distance R is no longer negligible compared to r and, therefore, must be carried through the derivation. Equation (4.9) becomes
+
+$p^2 = \frac{4\pi^2r(R+r)^2}{GM}$
+
+More commonly the equation is written in the equivalent form
+
+$p^2 = \frac{4\pi^2a^3}{G(M+m)}$
+
+where $a$ is the semi-major axis. The semi-major axis used in astronomy is
+always the primary-to-secondary distance, or the *geocentric* semi-major axis.
+For example, the Moon's mean geocentric distance from Earth ($a$) is 384,403
+kilometers. On the other hand, the Moon's distance from the barycenter ($r$) is
+379,732 km, with Earth's counter-orbit ($R$) taking up the difference of 4,671 km.
 </div>
 
 (4.16) $V*p = \sqrt{\frac{2GMR*a}{R*p(R*a+R_p)}}$
