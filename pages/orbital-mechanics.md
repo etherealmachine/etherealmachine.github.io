@@ -575,50 +575,155 @@ emit(
   </div>
 </div>
 
+The eccentricity $e$ of an orbit is given by
+
 (4.20) $e = \frac{R_pV_p^2}{GM} - 1$
 
-## Problem 4.6
-
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-6">
+    #### Problem 4.6
+  </div>
+  <div id="problem4-6" class="panel-body collapse">
 Calculate the eccentricity of the orbit for the satellite in problem 4.5.
 
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-6">
+      Show solution
+    </button>
+    <div id="solution4-6" class="collapse">
 ```javascript
 function e(R_p, V_p) {
   return ((R_p * Math.pow(V_p, 2)) / GM) - 1;
 }
-e(R_earth + 200*1000, 7850);
+emit("e = %.5f", e(R_earth + 200*1000, 7850));
 ```
+    </div>
+  </div>
+</div>
 
-(4.21) $R_p = a(1-e)$
+If the semi-major axis $a$ and the eccentricity $e$ of an orbit are known, then
+the periapsis and apoapsis distances can be calculated by
+
+(4.21) $R_p = a(1-e)$, and
 
 (4.22) $R_a = a(1+e)$
 
 also note $R_p+R_a = 2a$
 
-## Problem 4.7
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-7">
+    #### Problem 4.7
+  </div>
+  <div id="problem4-7" class="panel-body collapse">
+A satellite in Earth orbit has a semi-major axis of 6,700 km and an eccentricity
+of 0.01. Calculate the satellite's altitude at both perigee and apogee.
 
-A satellite in Earth orbit has a semi-major axis of 6,700 km and an eccentricity of 0.01. Calculate the satellite's altitude at both perigee and apogee.
-
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-7">
+      Show solution
+    </button>
+    <div id="solution4-7" class="collapse">
 ```javascript
-a = 6700 * 1000;
+a = 6700 * 1000; // meters
 e = 0.01;
 R_p = a*(1 - e);
 R_a = a*(1 + e);
-[((R_p - R_earth) / 1000) + " km", ((R_a - R_earth) / 1000) + " km"];
+emit("Altitude @ perigee = %.1f km", (R_p - R_earth) / 1000);
+emit("Altitude @ apogee = %.1f km", (R_a - R_earth) / 1000);
 ```
+    </div>
+  </div>
+</div>
 
-Launch of a Space Vehicle The launch of a satellite or space vehicle consists
------------------------------------------------------------------------------
+### Launch of a Space Vehicle
 
-of a period of powered flight during which the vehicle is lifted above the Earth's atmosphere and accelerated to orbital velocity by a rocket, or launch vehicle. Powered flight concludes at burnout of the rocket's last stage at which time the vehicle begins its free flight. During free flight the space vehicle is assumed to be subjected only to the gravitational pull of the Earth. If the vehicle moves far from the Earth, its trajectory may be affected by the gravitational influence of the sun, moon, or another planet.
+The launch of a satellite or space vehicle consists of a period of powered
+flight during which the vehicle is lifted above the Earth's atmosphere and
+accelerated to orbital velocity by a rocket, or launch vehicle. Powered flight
+concludes at burnout of the rocket's last stage at which time the vehicle begins
+its free flight. During free flight the space vehicle is assumed to be subjected
+only to the gravitational pull of the Earth. If the vehicle moves far from the
+Earth, its trajectory may be affected by the gravitational influence of the sun,
+moon, or another planet.
 
+<div class="pull-right text-center">
 <img
-    src="https://docs.google.com/drawings/d/18NEGLWMyfpBlYb2wkPMpeuDxxpTEtE_G9IH-smdPCxw/pub?w=355&amp;h=282"
-    class="pull-right">
+    src="https://docs.google.com/drawings/d/18NEGLWMyfpBlYb2wkPMpeuDxxpTEtE_G9IH-smdPCxw/pub?w=355&amp;h=282">
+  <p>Figure 4.7</p>
+</div>
 
-A space vehicle's orbit may be determined from the position and the velocity of the vehicle at the beginning of its free flight. A vehicle's position and velocity can be described by the variables $r$, $v$, and, $\gamma$ where $r$ is the vehicle's distance from the center of the Earth, $v$ is its velocity, and $\gamma$ is the angle between the position and the velocity vectors, called the zenith angle (see [Figure 4.7](/fig4-7.gif)). If we let $r*1$, $v*1$, and $\gamma*1$ be the initial (launch) values of $r$, $v$, and $\gamma$, then we may consider these as given quantities. If we let point $P*2$ represent the perigee, then equation (4.13) becomes
+A space vehicle's orbit may be determined from the position and the velocity of
+the vehicle at the beginning of its free flight. A vehicle's position and
+velocity can be described by the variables $r$, $v$, and, $\gamma$ where $r$ is
+the vehicle's distance from the center of the Earth, $v$ is its velocity, and
+$\gamma$ is the angle between the position and the velocity vectors, called the
+zenith angle (see Figure 4.7).
+If we let $r_1$, $v_1$, and $\gamma_1$ be the initial (launch) values of $r$,
+$v$, and $\gamma$, then we may consider these as given quantities. If we let
+point $P_2$ represent the perigee, then equation (4.13) becomes
 
-(4.23) $v*2 = V*p = \frac{r*1v*1\sin{\gamma*1}}{R*p}$
+(4.23) $v_2 = V_p = \frac{r_1v_1\sin{\gamma_1}}{R_p}$
 
-Substituting equation (4.23) into (4.15), we can obtain an equation for the perigee radius $R_p$.
+Substituting equation (4.23) into (4.15), we can obtain an equation for the
+perigee radius $R_p$.
 
-(4.24) $$
+(4.24) $\frac{r_1^2 v_1^2 \sin^2 \gamma_1}{R_p^2} - v_1^2 = 2GM \left( \frac{1}
+{R_p} - \frac{1}{r_1} \right)$
+
+Multiplying through by $\frac{-R_p^2}{r_1^2v_1^2}$ and rearranging, we get
+
+(4.25) $\left(\frac{R_p}{r_1}\right)^2(1-C) + \left(\frac{R_p}{r_1}\right)C -
+\sin^2\gamma_1 = 0$
+
+where $C = \frac{2GM}{r_1v_1^2}$
+
+Note that this is a simple quadratic equation in the ratio $\frac{R_p
+}{r_1}$ and that $\frac{2GM}{r_1v_1^2}$ is a nondimensional parameter of the
+orbit.
+
+Solving for $\frac{R_p}{r_1}$ gives
+
+(4.26) $\left(\frac{R_p}{r_1}\right)_{1,2} = \frac{-C \pm \sqrt{C^2 - 4(1-C)
+(-\sin^2\gamma_1)}} {2
+(1-C)}$
+
+Like any quadratic, the above equation yields two answers. The smaller of the
+two answers corresponds to $R_p$, the periapsis radius. The other root
+corresponds to the apoapsis radius, $R_a$.
+
+Please note that in practice spacecraft launches are usually terminated at
+either perigee or apogee, i.e. $\gamma = 90$. This condition results in the
+minimum use of propellant.
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-8">
+    #### Problem 4.8
+  </div>
+  <div id="problem4-8" class="panel-body collapse">
+A satellite is launched into Earth orbit where its launch vehicle burns out at
+an altitude of 250 km.  At burnout the satellite's velocity is 7,900 m/s with the
+zenith angle equal to 89 degrees.  Calculate the satellite's altitude at perigee
+and apogee.
+
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-8">
+      Show solution
+    </button>
+    <div id="solution4-8" class="collapse">
+```javascript
+var r1 = R_earth + (250*1000);
+var v1 = 7900;
+var g1 = 89 * (Math.PI / 180);
+var C = (2*GM) / (r1 * Math.pow(v1, 2));
+var root = Math.pow(C, 2) - 4*(1 - C) * -Math.pow(Math.sin(g1), 2);
+var R_p = r1 * ((-C + Math.sqrt(root)) / (2*(1-C)));
+var R_a = r1 * ((-C - Math.sqrt(root)) / (2*(1-C)));
+emit("Altitude @ perigee: %.1f km", (R_p - R_earth) / 1000);
+emit("Altitude @ apogee: %.1f km", (R_a - R_earth) / 1000);
+```
+    </div>
+  </div>
+</div>
