@@ -29,12 +29,9 @@
 		href="/bower_components/highlightjs/styles/github.css">
 <script>hljs.initHighlightingOnLoad();</script>
 <link rel="stylesheet" href="/css/main.css">
-<script>
-console.log('preview enabled');
-new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
-	window.location = window.location;
-};
-</script>
+	
+	<script src="/js/preview.js"></script>
+	
 
 	</head>
 	<body>
@@ -55,6 +52,12 @@ new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
 			<div>
 				<p></p>
 				<h3>Recent Posts</h3>
+				
+					<h4>
+						<a href="pages/orbital-mechanics.html">Orbital Mechanics</a>
+						<small>Posted Aug 13, 2015</small>
+					</h4>
+					<p>A small workbook on orbital mechanics problems with runnable code.</p>
 				
 					<h4>
 						<a href="pages/resume.html">Resume</a>

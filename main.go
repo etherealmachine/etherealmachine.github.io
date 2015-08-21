@@ -21,8 +21,8 @@ var (
 )
 
 type Site struct {
-	Recent        []*Page
-	PreviewScript string
+	Recent  []*Page
+	Preview bool
 }
 
 type Meta struct {
@@ -85,7 +85,7 @@ func (g *generator) visit(path string, fileInfo os.FileInfo, err error) error {
 
 func (g *generator) gatherSiteData() {
 	for _, page := range g.pages {
-		if page.Meta.Published {
+		if page.Preview || page.Meta.Published {
 			g.site.Recent = append(g.site.Recent, page)
 		}
 	}
@@ -163,7 +163,7 @@ func parseContent(buf []byte) string {
 func runGenerator() {
 	g := &generator{
 		site: &Site{
-			PreviewScript: previewScript,
+			Preview: *preview,
 		},
 		pages: make(map[string]*Page),
 	}

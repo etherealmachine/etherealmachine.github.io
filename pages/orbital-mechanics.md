@@ -727,3 +727,40 @@ emit("Altitude @ apogee: %.1f km", (R_a - R_earth) / 1000);
     </div>
   </div>
 </div>
+
+Equation (4.26) gives the values of $R_p$ and $R_a$ from which the eccentricity
+of the orbit can be calculated, however, it may be simpler to calculate the
+eccentricity $e$ directly from the equation
+
+(4.27) $e = \sqrt{\left(\frac{r_1v_1^2}{GM}-1\right)^2\sin^2\gamma_1+\cos^2\gamma_1}$
+
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-9">
+    #### Problem 4.9
+  </div>
+  <div id="problem4-9" class="panel-body collapse">
+Calculate the eccentricity of the orbit for the satellite in problem 4.8.
+
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-9">
+      Show solution
+    </button>
+    <div id="solution4-9" class="collapse">
+```javascript
+var r1 = R_earth + (250*1000);
+var v1 = 7900;
+var g1 = 89 * (Math.PI / 180);
+function e(r1, v1, g1) {
+  return Math.sqrt(
+    Math.pow(((r1*Math.pow(v1, 2)) / GM) - 1, 2) * Math.pow(Math.sin(g1), 2)
+    + Math.pow(Math.cos(g1), 2));
+};
+emit("e = %.7f", e(r1, v1, g1));
+```
+    </div>
+  </div>
+</div>
+
+Baz

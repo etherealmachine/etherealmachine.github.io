@@ -29,12 +29,9 @@
 		href="/bower_components/highlightjs/styles/github.css">
 <script>hljs.initHighlightingOnLoad();</script>
 <link rel="stylesheet" href="/css/main.css">
-<script>
-console.log('preview enabled');
-new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
-	window.location = window.location;
-};
-</script>
+	
+	<script src="/js/preview.js"></script>
+	
 
 	</head>
 	<body>
@@ -614,11 +611,35 @@ var R_p = r1 * ((-C + Math.sqrt(root)) / (2*(1-C)));
 var R_a = r1 * ((-C - Math.sqrt(root)) / (2*(1-C)));
 emit(&#34;Altitude @ perigee: %.1f km&#34;, (R_p - R_earth) / 1000);
 emit(&#34;Altitude @ apogee: %.1f km&#34;, (R_a - R_earth) / 1000);</code></pre>
-<p>223.6 km
-797.0 km</p>
 </div>
 </div>
 </div>
+<p>Equation (4.26) gives the values of $R_p$ and $R_a$ from which the eccentricity
+of the orbit can be calculated, however, it may be simpler to calculate the
+eccentricity $e$ directly from the equation</p>
+<p>(4.27) $e = \sqrt{\left(\frac{r_1v_1^2}{GM}-1\right)^2\sin^2\gamma_1+\cos^2\gamma_1}$</p>
+<div class="panel panel-default">
+<div class="panel-heading" data-toggle="collapse" href="#problem4-9">
+<h4>Problem 4.9</h4>
+</div>
+<div id="problem4-9" class="panel-body collapse">
+<p>Calculate the eccentricity of the orbit for the satellite in problem 4.8.</p>
+<p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-9">
+      Show solution</button></p>
+<div id="solution4-9" class="collapse">
+<pre><code class="javascript">var r1 = R_earth + (250*1000);
+var v1 = 7900;
+var g1 = 89 * (Math.PI / 180);
+function e(r1, v1, g1) {
+  return Math.sqrt(
+    Math.pow(((r1*Math.pow(v1, 2)) / GM) - 1, 2) * Math.pow(Math.sin(g1), 2)
+    + Math.pow(Math.cos(g1), 2));
+};
+emit(&#34;e = %.7f&#34;, e(r1, v1, g1));</code></pre>
+</div>
+</div>
+</div>
+<p>Baz</p>
 			</div>
 			<div class="clearfix"></div>
 			

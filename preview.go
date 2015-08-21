@@ -5,18 +5,13 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/gorilla/websocket"
 	"gopkg.in/fsnotify.v1"
 )
 
 var (
-	previewScript = `<script>
-console.log('preview enabled');
-new WebSocket('ws://localhost:8080/ws').onmessage = function(e) {
-	window.location = window.location;
-};
-</script>`
 	refresh chan bool
 )
 
@@ -47,10 +42,15 @@ UpgradeWebsocket:
 			}
 		}
 	}()
+	log.Printf("connected with websocket")
+	t := time.NewTicker(time.Second)
 	for {
 		select {
+		case <-t.C:
+			c.WriteMessage(websocket.TextMessage, []byte("heartbeat"))
 		case <-refresh:
 			c.WriteMessage(websocket.TextMessage, []byte("refresh"))
+			log.Printf("refresh sent")
 		case <-done:
 			return
 		}
@@ -62,11 +62,12 @@ func watch(w *fsnotify.Watcher) {
 		select {
 		case event := <-w.Events:
 			if event.Op&fsnotify.Write == fsnotify.Write {
-				log.Println(event.String())
-				w.Close()
+				log.Printf("%s triggered refresh", event.Name)
+				start := time.Now()
 				runGenerator()
-				w = initWatch()
+				log.Printf("generator took %v", time.Since(start))
 				refresh <- true
+				return
 			}
 		case err := <-w.Errors:
 			log.Println(err)
@@ -91,7 +92,15 @@ func initWatch() *fsnotify.Watcher {
 
 func runPreview() {
 	refresh = make(chan bool, 100)
-	go watch(initWatch())
+	go func() {
+		for {
+			w := initWatch()
+			watch(w)
+			go func() {
+				w.Close()
+			}()
+		}
+	}()
 	http.Handle("/", http.FileServer(http.Dir(".")))
 	http.HandleFunc("/ws", websocketHandler)
 	log.Print("server listening at 127.0.0.1:8080")

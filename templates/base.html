@@ -26,7 +26,9 @@
 		href="/bower_components/highlightjs/styles/github.css">
 <script>hljs.initHighlightingOnLoad();</script>
 <link rel="stylesheet" href="/css/main.css">
-{{ .PreviewScript }}
+	{{ if .Preview }}
+	<script src="/js/preview.js"></script>
+	{{ end }}
 {{ end }}
 
 {{ define "nav" }}
