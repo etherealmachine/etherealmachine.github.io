@@ -107,7 +107,8 @@ func (g *generator) generateIndex() {
 	g.template.ExecuteTemplate(f, "index.html", &Page{
 		Site: g.site,
 		Meta: &Meta{
-			Title: "etherealmachine.github.io",
+			Title:     "etherealmachine.github.io",
+			Published: true,
 		},
 	})
 }

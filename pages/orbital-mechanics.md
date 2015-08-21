@@ -1,13 +1,37 @@
 title: Orbital Mechanics
 summary: A small workbook on orbital mechanics problems with runnable code.
 date: 2015-08-13T00:00:00Z
+published: true
+
+<div class="alert alert-warning" role="alert">
+This page is a work-in-progress.
+
+10 out of 30 problems are complete.
+  <div class="progress" style="margin: 5px 0px 0px 0px;">
+    <div
+      class="progress-bar"
+      role="progressbar"
+      aria-valuenow="33"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      style="width: 33%;">
+      33%
+    </div>
+  </div>
+</div>
 
 <script src="/js/emit.js"></script>
 <!--table class="table table-bordered"-->
-This is a copy of Robert A. Braeunig's inestimable  <a
-href="http://www.braeunig.us/space/index.htm">Rocket & Space Technology</a>. I
-learn best by following examples, so I created a workbook where I could copy the
-text and follow along by solving the problems.
+<div class="well">
+<p>
+This is a copy of Robert A. Braeunig's inestimable
+[Rocket & Space Technology](http://www.braeunig.us/space/index.htm). I learn
+best by following examples, so I created a workbook where I could copy the text
+and follow along by solving the problems.
+</p>
+</div>
+
+## Introduction
 
 **Orbital mechanics**, also called flight mechanics, is the study of the motions
 of artificial satellites and space vehicles moving under the influence of forces
@@ -734,7 +758,6 @@ eccentricity $e$ directly from the equation
 
 (4.27) $e = \sqrt{\left(\frac{r_1v_1^2}{GM}-1\right)^2\sin^2\gamma_1+\cos^2\gamma_1}$
 
-
 <div class="panel panel-default">
   <div class="panel-heading" data-toggle="collapse" href="#problem4-9">
     #### Problem 4.9
@@ -763,4 +786,29 @@ emit("e = %.7f", e(r1, v1, g1));
   </div>
 </div>
 
-Baz
+To pin down a satellite's orbit in space, we need to know the angle $\nu$, the true anomaly, from the periapsis point to the launch point. This angle is given by
+
+(4.28) $\tan\nu = \frac{\left(\frac{r_1v_1^2}{GM}\right)\sin\gamma_1\cos\gamma_1}{\left(\frac{r_1v_1^2}{GM}\right)\sin^2\gamma_1 - 1}$
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-10">
+    #### Problem 4.10
+  </div>
+  <div id="problem4-10" class="panel-body collapse">
+Calculate the true anomaly, $\nu$ from perigee point to launch point for the satellite
+in problem 4.8.
+
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-10">
+      Show solution
+    </button>
+    <div id="solution4-10" class="collapse">
+```javascript
+var rvGM = (r1*Math.pow(v1, 2))/GM;
+var v = Math.atan((rvGM*Math.sin(g1)*Math.cos(g1))/((rvGM*Math.pow(Math.sin(g1), 2)) - 1));
+emit("true anomaly = %.3f°", v / (Math.PI / 180));
+```
+    </div>
+  </div>
+</div>
