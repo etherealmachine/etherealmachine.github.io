@@ -4,7 +4,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"path/filepath"
+	"syscall"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -14,6 +16,10 @@ import (
 var (
 	refresh chan bool
 )
+
+func init() {
+	refresh = make(chan bool, 100)
+}
 
 func websocketHandler(w http.ResponseWriter, r *http.Request) {
 	for {
@@ -91,7 +97,6 @@ func initWatch() *fsnotify.Watcher {
 }
 
 func runPreview() {
-	refresh = make(chan bool, 100)
 	go func() {
 		for {
 			w := initWatch()
@@ -100,6 +105,15 @@ func runPreview() {
 				w.Close()
 			}()
 		}
+	}()
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+	signal.Notify(c, syscall.SIGTERM)
+	go func() {
+		<-c
+		*preview = false
+		runGenerator()
+		os.Exit(0)
 	}()
 	http.Handle("/", http.FileServer(http.Dir(".")))
 	http.HandleFunc("/ws", websocketHandler)

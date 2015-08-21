@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 	"text/template"
 	"time"
 
@@ -73,11 +72,16 @@ func (g *generator) walk() error {
 }
 
 func (g *generator) visit(path string, fileInfo os.FileInfo, err error) error {
-	if strings.HasSuffix(path, ".md") {
+	if filepath.Ext(path) == ".md" {
 		err := g.generatePage(path, fileInfo)
 		if err != nil {
 			g.errors = append(g.errors, err)
 			return nil
+		}
+	} else if filepath.Ext(path) == ".html" {
+		err := os.Remove(path)
+		if err != nil {
+			g.errors = append(g.errors, err)
 		}
 	}
 	return nil
@@ -110,11 +114,13 @@ func (g *generator) generateIndex() {
 
 func (g *generator) generatePages() error {
 	for _, page := range g.pages {
-		f, err := os.Create(url(page))
-		if err != nil {
-			return err
+		if page.Site.Preview || page.Meta.Published {
+			f, err := os.Create(url(page))
+			if err != nil {
+				return err
+			}
+			g.template.ExecuteTemplate(f, "page.html", page)
 		}
-		g.template.ExecuteTemplate(f, "page.html", page)
 	}
 	return nil
 }

@@ -41,6 +41,16 @@
 					etherealmachine.github.io
 			</a>
 		</div>
+		<div class="navbar-right">
+			<p class="navbar-text">
+				{{ if .Preview }}
+				<span id="offline-label" class="invisible label label-danger">Offline</span>
+				{{ end }}
+				{{ if not .Meta.Published }}
+				<span class="label label-warning">Unpublished</span>
+				{{ end }}
+			</p>
+		</div>
 	</div>
 </nav>
 {{ end }}
