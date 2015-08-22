@@ -6,16 +6,16 @@ published: true
 <div class="alert alert-warning" role="alert">
 This page is a work-in-progress.
 
-10 out of 30 problems are complete.
+11 out of 30 problems are complete.
   <div class="progress" style="margin: 5px 0px 0px 0px;">
     <div
       class="progress-bar"
       role="progressbar"
-      aria-valuenow="33"
+      aria-valuenow="37"
       aria-valuemin="0"
       aria-valuemax="100"
-      style="width: 33%;">
-      33%
+      style="width: 37%;">
+      37%
     </div>
   </div>
 </div>
@@ -709,7 +709,7 @@ orbit.
 
 Solving for $\frac{R_p}{r_1}$ gives
 
-(4.26) $\left(\frac{R_p}{r_1}\right)_{1,2} = \frac{-C \pm \sqrt{C^2 - 4(1-C)
+(4.26) $\left(\dfrac{R_p}{r_1}\right)_{1,2} = \dfrac{-C \pm \sqrt{C^2 - 4(1-C)
 (-\sin^2\gamma_1)}} {2
 (1-C)}$
 
@@ -788,7 +788,7 @@ emit("e = %.7f", e(r1, v1, g1));
 
 To pin down a satellite's orbit in space, we need to know the angle $\nu$, the true anomaly, from the periapsis point to the launch point. This angle is given by
 
-(4.28) $\tan\nu = \frac{\left(\frac{r_1v_1^2}{GM}\right)\sin\gamma_1\cos\gamma_1}{\left(\frac{r_1v_1^2}{GM}\right)\sin^2\gamma_1 - 1}$
+(4.28) $\tan\nu = \dfrac{\left(\frac{r_1v_1^2}{GM}\right)\sin\gamma_1\cos\gamma_1}{\left(\frac{r_1v_1^2}{GM}\right)\sin^2\gamma_1 - 1}$
 
 <div class="panel panel-default">
   <div class="panel-heading" data-toggle="collapse" href="#problem4-10">
@@ -812,3 +812,97 @@ emit("true anomaly = %.3f°", v / (Math.PI / 180));
     </div>
   </div>
 </div>
+
+In most calculations, the complement of the zenith angle is used, denoted by
+$\Phi$. This angle is called the flight-path angle, and is positive when the
+velocity vector is directed away from the primary as shown in Figure 4.8. When
+flight-path angle is used, equations (4.26) through (4.28) are rewritten as
+follows:
+
+(4.29) $\left(\dfrac{R_p}{r_1}\right)_{1,2} = \dfrac{-C \pm \sqrt{C^2 - 4(1-C)
+(-\cos^2\Phi})} {2
+(1-C)}$
+
+where $C = \frac{GM}{rv^2}$
+
+(4.30) $e = \sqrt{\left(\frac{rv^2}{GM}-1\right)^2\cos^2\Phi + \sin^2\Phi}$
+
+(4.31) $\tan\nu = \dfrac{\left(\frac{rv^2}{GM}\right)\cos\Phi\sin\Phi}{\left
+(\frac{rv^2}{GM}\right)\cos^2\Phi-1}$
+
+The semi-major axis is, of course, equal to $\frac{R_p+R_a}{2}$, though it may be
+easier to calculate it directly as follows:
+
+(4.32) $a = \dfrac{1}{\left(\frac{2}{r} - \frac{v^2}{GM}\right)}$
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" href="#problem4-11">
+    #### Problem 4.11
+  </div>
+  <div id="problem4-11" class="panel-body collapse">
+Calculate the semi-major axis of the orbit for the satellite in problem 4.8.
+
+    <button
+      class="btn btn-primary"
+      data-toggle="collapse" href="#solution4-11">
+      Show solution
+    </button>
+    <div id="solution4-11" class="collapse">
+```javascript
+function a(r, v) {
+  return 1 / ((2 / r) - (Math.pow(v, 2) / GM));
+}
+emit("%d m", a(r1, v1));
+```
+    </div>
+  </div>
+</div>
+
+If $e$ is solved for directly using equation (4.27) or (4.30), and $a$ is solved
+for using equation (4.32), $R_p$ and $R_a$ can be solved for simply using
+equations (4.21) and (4.22).
+
+#### Orbit Tile, Rotation and Orientation
+
+Above we determined the size and shape of the orbit, but to determine the
+orientation of the orbit in space, we must know the latitude and longitude and
+the heading of the space vehicle at burnout.
+
+Figure 4.9 above illustrates the location of a space vehicle at engine burnout,
+or orbit insertion. $\beta$ is the azimuth heading measured in degrees clockwise
+from north, $\delta$ is the geocentric latitude (or declination) of the burnout
+point, $\Delta\lambda$ is the angular distance between the ascending node and the
+burnout point measured in the equatorial plane, and $\ell$ is the angular
+distance between the ascending node and the burnout point measured in the
+orbital plane. $\lambda_1$ and $\lambda_2$ are the geographical longitudes of
+the ascending node and the burnout point at the instant of engine burnout.
+Figure 4.10 pictures the orbital elements, where $i$ is the inclination,
+$\Omega$ is the longitude at the ascending node, $\omega$ is the argument of
+periapsis, and $\nu$ is the true anomaly.
+
+If $\beta$, $\delta$, and $\lambda_2$ are given, the other values can be
+calculated from the following relationships:
+
+(4.33) $\cos i = \cos \delta \sin \beta$
+
+(4.34) $\tan \ell = \dfrac{\tan\delta}{\cos\beta}$
+
+(4.35) $\tan \Delta\lambda = \sin \delta \tan \beta$
+
+(4.36) $\omega = \ell - \nu$
+
+(4.37) $\lambda_1 = \lambda_2 - \Delta \lambda$
+
+In equation (4.36), the value of $\nu$ is found using equation (4.28) or (4.31).
+If $\nu$ is positive, periapsis is west of the burnout point (as shown in
+figure 4.10). If $\nu$ is negative, periapsis is east of the burnout point.
+
+The logitude of the ascending node, $\Omega$, is measured in celestial
+longitude, while $\lambda_1$ is geographical longitude. The celestial longitude
+of the ascending node is equal to the *local apparent sidereal time*, in
+degrees, at longitude $\lambda_1$ at the time of engine burnout. Sidereal time
+is defined as the hour angle of the vernal equinox at a specific locality and
+time; it has the same value as the right ascension of any celestial body that is
+crossing the local meridian at that same instant. At the moment when the vernal
+equinox crosses the local meridian the local apparent sidereal time is 00:00.
+Try the below sidereal time calculator:
