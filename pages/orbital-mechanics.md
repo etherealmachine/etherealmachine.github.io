@@ -906,3 +906,11 @@ time; it has the same value as the right ascension of any celestial body that is
 crossing the local meridian at that same instant. At the moment when the vernal
 equinox crosses the local meridian the local apparent sidereal time is 00:00.
 Try the below sidereal time calculator:
+
+<script src="/js/moment.min.js"></script>
+<script src="/js/sidereal.js"></script>
+
+```javascript
+var last = local_apparent_sidereal_time(-142.483, new Date(2000, 10, 20, 15));
+emit("%.2f", last);
+```

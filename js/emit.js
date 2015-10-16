@@ -31,6 +31,10 @@ function fmt(fmtString, vals) {
 	return s;
 }
 
+function printf(fmtString, vals) {
+	console.log(fmt(fmtString, vals));
+}
+
 function emitNode(node, fmtString, vals) {
 	var el = document.createElement("code");
 	var text = fmt(fmtString, vals);
