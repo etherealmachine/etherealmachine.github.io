@@ -21,13 +21,15 @@ This page is a work-in-progress.
 </div>
 
 <script src="/js/emit.js"></script>
-<!--table class="table table-bordered"-->
 <div class="well">
 <p>
 This is a copy of Robert A. Braeunig's inestimable
 [Rocket & Space Technology](http://www.braeunig.us/space/index.htm). I learn
 best by following examples, so I created a workbook where I could copy the text
 and follow along by solving the problems.
+</p>
+<p>
+If you click through the problem sets, you will find buttons to view Javascript solutions to the problems \(see e.g. [Problem 4.1](#problem4-1)\). Clicking "Show solution" runs the associated Javascript and emits the result, using a small library \([emit.js](/js/emit.js), available in the github repository\).
 </p>
 </div>
 
@@ -69,13 +71,13 @@ shows the relationships between eccentricity, semi-major axis, and energy and
 the type of conic section.
 
 <div class="pull-left">
+<!--table class="table"-->
 Conic Section | Eccentricity, e | Semi-Major Axis | Energy
 :------------ | :-------------: | :-------------: | :----:
 Circle        | 0               | = radius        | < 0
 Ellipse       | 0 < e < 1       | > 0             | < 0
 Parabola      | 1               | infinity        | 0
 Hyperbola     | > 1             | < 0             | > 0
-
 </div>
 
 <div class="clearfix"></div>
@@ -312,10 +314,10 @@ $\frac{v^2}{r} = \frac{GM}{r^2}$, or
 (4.6) $v = \sqrt{\frac{GM}{r}}$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-1">
+  <div class="panel-heading" href="#problem4-1">
     #### Problem 4.1
   </div>
-  <div id="problem4-1" class="panel-body collapse">
+  <div id="problem4-1" class="panel-body">
 Calculate the velocity of an artificial satellite orbiting the Earth in a
 circular orbit at an altitude of 200 km above the Earth's surface.
 
@@ -323,7 +325,8 @@ Note that the radius of the earth is 6,378.14 km.
 
     <button
       class="btn btn-primary"
-      data-toggle="collapse" href="#solution4-1">
+      data-toggle="collapse"
+      href="#solution4-1">
       Show solution
     </button>
     <div id="solution4-1" class="collapse">
@@ -403,15 +406,16 @@ A significant consequence of this equation is that it predicts Kepler's third
 law of planetary motion, that is $p^2 \sim r^3$.
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-2">
+  <div class="panel-heading" href="#problem4-2">
     #### Problem 4.2
   </div>
-  <div id="problem4-2" class="panel-body collapse">
+  <div id="problem4-2" class="panel-body">
 Calculate the period of revolution for the satellite in problem 4.1.
 
     <button
       class="btn btn-primary"
-      data-toggle="collapse" href="#solution4-2">
+      data-toggle="collapse"
+      href="#solution4-2">
       Show solution
     </button>
     <div id="solution4-2" class="collapse">
@@ -426,10 +430,10 @@ emit("period: %d seconds", p(R_satellite));
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-3">
+  <div class="panel-heading" href="#problem4-3">
     #### Problem 4.3
   </div>
-  <div id="problem4-3" class="panel-body collapse">
+  <div id="problem4-3" class="panel-body">
 Calculate the radius of orbit for a Earth satellite in a geosynchronous orbit, where the Earth's rotational period is 86,164.1 seconds.
 
 Recall from (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$. We want $r$ in terms of $p$.
@@ -538,10 +542,10 @@ Rearranging terms we get
 (4.19) $R_p = \frac{R_a}{\left ( \frac{2GM}{R_aV_a^2} - 1 \right )}$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-4">
+  <div class="panel-heading" href="#problem4-4">
     #### Problem 4.4
   </div>
-  <div id="problem4-4" class="panel-body collapse">
+  <div id="problem4-4" class="panel-body">
 An artificial Earth satellite is in an elliptical orbit which brings it to an altitude of 250 km at perigee and out to an altitude of 500 km at apogee. Calculate the velocity of the satellite at both perigee and apogee.
 
     <button
@@ -567,10 +571,10 @@ emit("V_a: %d m/s", V_a(R_a, R_p));
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-5">
+  <div class="panel-heading" href="#problem4-5">
     #### Problem 4.5
   </div>
-  <div id="problem4-5" class="panel-body collapse">
+  <div id="problem4-5" class="panel-body">
 A satellite in Earth orbit passes through its perigee point at an altitude of 200 km above the Earth's surface and at a velocity of 7,850 m/s. Calculate the apogee altitude of the satellite.
 
     <button
@@ -604,10 +608,10 @@ The eccentricity $e$ of an orbit is given by
 (4.20) $e = \frac{R_pV_p^2}{GM} - 1$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-6">
+  <div class="panel-heading" href="#problem4-6">
     #### Problem 4.6
   </div>
-  <div id="problem4-6" class="panel-body collapse">
+  <div id="problem4-6" class="panel-body">
 Calculate the eccentricity of the orbit for the satellite in problem 4.5.
 
     <button
@@ -636,10 +640,10 @@ the periapsis and apoapsis distances can be calculated by
 also note $R_p+R_a = 2a$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-7">
+  <div class="panel-heading" href="#problem4-7">
     #### Problem 4.7
   </div>
-  <div id="problem4-7" class="panel-body collapse">
+  <div id="problem4-7" class="panel-body">
 A satellite in Earth orbit has a semi-major axis of 6,700 km and an eccentricity
 of 0.01. Calculate the satellite's altitude at both perigee and apogee.
 
@@ -722,10 +726,10 @@ either perigee or apogee, i.e. $\gamma = 90$. This condition results in the
 minimum use of propellant.
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-8">
+  <div class="panel-heading" href="#problem4-8">
     #### Problem 4.8
   </div>
-  <div id="problem4-8" class="panel-body collapse">
+  <div id="problem4-8" class="panel-body">
 A satellite is launched into Earth orbit where its launch vehicle burns out at
 an altitude of 250 km.  At burnout the satellite's velocity is 7,900 m/s with the
 zenith angle equal to 89 degrees.  Calculate the satellite's altitude at perigee
@@ -759,10 +763,10 @@ eccentricity $e$ directly from the equation
 (4.27) $e = \sqrt{\left(\frac{r_1v_1^2}{GM}-1\right)^2\sin^2\gamma_1+\cos^2\gamma_1}$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-9">
+  <div class="panel-heading" href="#problem4-9">
     #### Problem 4.9
   </div>
-  <div id="problem4-9" class="panel-body collapse">
+  <div id="problem4-9" class="panel-body">
 Calculate the eccentricity of the orbit for the satellite in problem 4.8.
 
     <button
@@ -791,10 +795,10 @@ To pin down a satellite's orbit in space, we need to know the angle $\nu$, the t
 (4.28) $\tan\nu = \dfrac{\left(\frac{r_1v_1^2}{GM}\right)\sin\gamma_1\cos\gamma_1}{\left(\frac{r_1v_1^2}{GM}\right)\sin^2\gamma_1 - 1}$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-10">
+  <div class="panel-heading" href="#problem4-10">
     #### Problem 4.10
   </div>
-  <div id="problem4-10" class="panel-body collapse">
+  <div id="problem4-10" class="panel-body">
 Calculate the true anomaly, $\nu$ from perigee point to launch point for the satellite
 in problem 4.8.
 
@@ -836,10 +840,10 @@ easier to calculate it directly as follows:
 (4.32) $a = \dfrac{1}{\left(\frac{2}{r} - \frac{v^2}{GM}\right)}$
 
 <div class="panel panel-default">
-  <div class="panel-heading" data-toggle="collapse" href="#problem4-11">
+  <div class="panel-heading" href="#problem4-11">
     #### Problem 4.11
   </div>
-  <div id="problem4-11" class="panel-body collapse">
+  <div id="problem4-11" class="panel-body">
 Calculate the semi-major axis of the orbit for the satellite in problem 4.8.
 
     <button
@@ -862,7 +866,13 @@ If $e$ is solved for directly using equation (4.27) or (4.30), and $a$ is solved
 for using equation (4.32), $R_p$ and $R_a$ can be solved for simply using
 equations (4.21) and (4.22).
 
-#### Orbit Tile, Rotation and Orientation
+# The End.
+
+The next bit requires a notion of "sidereal time", which has to do with the position of the Earth relative to some fixed stars. This starts going into some very heavy math involving real-world circumstances and I was never able to find or write a Javascript library to compute the "local apparent sidereal time" - required for the problem sets. If anyone reads this and feels the urge to fill me in, feel free to drop me a line.
+
+<!--
+# TODO
+#### Orbit Tilt, Rotation and Orientation
 
 Above we determined the size and shape of the orbit, but to determine the
 orientation of the orbit in space, we must know the latitude and longitude and
@@ -906,11 +916,14 @@ time; it has the same value as the right ascension of any celestial body that is
 crossing the local meridian at that same instant. At the moment when the vernal
 equinox crosses the local meridian the local apparent sidereal time is 00:00.
 Try the below sidereal time calculator:
+-->
 
 <script src="/js/moment.min.js"></script>
 <script src="/js/sidereal.js"></script>
 
+<!--
 ```javascript
 var last = local_apparent_sidereal_time(-142.483, new Date(2000, 10, 20, 15));
 emit("%.2f", last);
 ```
+-->

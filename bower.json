@@ -10,9 +10,9 @@
     "bower_components"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.4",
-    "jquery": "~2.1.4",
-    "MathJax": "~2.5.3",
-    "highlightjs": "~8.6.0"
+    "bootstrap": "~3.3.7",
+    "jquery": "~3.2.1",
+    "MathJax": "~2.7.1",
+    "highlightjs": "~9.10.0"
   }
 }

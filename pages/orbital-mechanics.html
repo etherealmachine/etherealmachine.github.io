@@ -76,7 +76,6 @@
 		</div>
 	</div>
 </div><script src="/js/emit.js"></script>
-
 </p>
 <div class="well">
 <p>
@@ -85,9 +84,12 @@
 best by following examples, so I created a workbook where I could copy the text
 and follow along by solving the problems.
 </p>
-</div>
-<h2>Introduction</h2>
-<p><strong>Orbital mechanics</strong>, also called flight mechanics, is the study of the motions
+	<p>
+		<p>If you click through the problem sets, you will find buttons to view Javascript solutions to the problems (see e.g. <a href="#problem4-1">Problem 4.1</a>). Clicking &#34;Show solution&#34; runs the associated Javascript and emits the result, using a small library (<a href="/js/emit.js">emit.js</a>, available in the github repository).
+</p>
+	</div>
+	<h2>Introduction</h2>
+	<p><strong>Orbital mechanics</strong>, also called flight mechanics, is the study of the motions
 of artificial satellites and space vehicles moving under the influence of forces
 such as gravity, atmospheric drag, thrust, etc. Orbital mechanics is a modern
 offshoot of celestial mechanics which is the study of the motions of natural
@@ -97,7 +99,7 @@ put forward his laws of motion and formulated his law of universal gravitation.
 The engineering applications of orbital mechanics include ascent trajectories,
 reentry and landing, rendezvous computations, and lunar and interplanetary
 trajectories.</p>
-<h2>Conic Sections</h2><img src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590" width="500px" class="pull-right"/></p>
+	<h2>Conic Sections</h2><img src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590" width="500px" class="pull-right"/></p>
 <p>A <strong>conic section</strong>, or just <strong>conic</strong>, is a curve formed by passing a plane
 through a right circular cone. As shown in Figure 4.1, the angular orientation
 of the plane relative to the cone determines whether the conic section is a
@@ -114,39 +116,44 @@ section is also related to the semi-major axis and the energy. The table below
 shows the relationships between eccentricity, semi-major axis, and energy and
 the type of conic section.</p>
 <div class="pull-left">
-<table class="table table-bordered">
-	<tr>
-		<th>Conic Section</th>
-		<th>Eccentricity, e</th>
-		<th>Semi-Major Axis</th>
-		<th>Energy</th>
-	</tr>
-	<tr>
-		<td style="text-align: left;">Circle</td>
-		<td style="text-align: center;">0</td>
-		<td style="text-align: center;">= radius</td>
-		<td style="text-align: center;">&lt; 0</td>
-	</tr>
-	<tr>
-		<td style="text-align: left;">Ellipse</td>
-		<td style="text-align: center;">0 &lt; e &lt; 1</td>
-		<td style="text-align: center;">&gt; 0</td>
-		<td style="text-align: center;">&lt; 0</td>
-	</tr>
-	<tr>
-		<td style="text-align: left;">Parabola</td>
-		<td style="text-align: center;">1</td>
-		<td style="text-align: center;">infinity</td>
-		<td style="text-align: center;">0</td>
-	</tr>
-	<tr>
-		<td style="text-align: left;">Hyperbola</td>
-		<td style="text-align: center;">&gt; 1</td>
-		<td style="text-align: center;">&lt; 0</td>
-		<td style="text-align: center;">&gt; 0</td>
-	</tr>
+	<table class="table">
+		<tr>
+			<th>Conic Section</th>
+			<th>Eccentricity, e</th>
+			<th>Semi-Major Axis</th>
+			<th>Energy</th>
+		</tr>
+		<tr>
+			<td style="text-align: left;">Circle</td>
+			<td style="text-align: center;">0</td>
+			<td style="text-align: center;">= radius</td>
+			<td style="text-align: center;">&lt; 0</td>
+		</tr>
+		<tr>
+			<td style="text-align: left;">Ellipse</td>
+			<td style="text-align: center;">0 &lt; e &lt; 1</td>
+			<td style="text-align: center;">&gt; 0</td>
+			<td style="text-align: center;">&lt; 0</td>
+		</tr>
+		<tr>
+			<td style="text-align: left;">Parabola</td>
+			<td style="text-align: center;">1</td>
+			<td style="text-align: center;">infinity</td>
+			<td style="text-align: center;">0</td>
+		</tr>
+		<tr>
+			<td style="text-align: left;">Hyperbola</td>
+			<td style="text-align: center;">&gt; 1</td>
+			<td style="text-align: center;">&lt; 0</td>
+			<td style="text-align: center;">&gt; 0</td>
+		</tr>
+		<tr>
+			<td style="text-align: left;">
+		</p>
+	</div>
+	</td>
+</tr>
 </table>
-</div>
 <div class="clearfix">
 </div>
 <p>Satellite orbits can be any of the four conic sections. This page deals mostly
@@ -333,10 +340,10 @@ for a circular orbit,</p>
 <p>$\frac{v^2}{r} = \frac{GM}{r^2}$, or </p>
 <p>(4.6) $v = \sqrt{\frac{GM}{r}}$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-1">
+<div class="panel-heading" href="#problem4-1">
 	<h4>Problem 4.1</h4>
 </div>
-<div id="problem4-1" class="panel-body collapse">
+<div id="problem4-1" class="panel-body">
 	<p>Calculate the velocity of an artificial satellite orbiting the Earth in a
 circular orbit at an altitude of 200 km above the Earth&#39;s surface.</p>
 	<p>Note that the radius of the earth is 6,378.14 km.</p>
@@ -403,10 +410,10 @@ semi-major axis ($a$) of the orbit.</p>
 <p>A significant consequence of this equation is that it predicts Kepler&#39;s third
 law of planetary motion, that is $p^2 \sim r^3$.</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-2">
+<div class="panel-heading" href="#problem4-2">
 	<h4>Problem 4.2</h4>
 </div>
-<div id="problem4-2" class="panel-body collapse">
+<div id="problem4-2" class="panel-body">
 	<p>Calculate the period of revolution for the satellite in problem 4.1.</p>
 	<p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-2">
       Show solution</button></p>
@@ -419,10 +426,10 @@ emit(&#34;period: %d seconds&#34;, p(R_satellite));</code></pre>
 </div>
 </div>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-3">
+<div class="panel-heading" href="#problem4-3">
 	<h4>Problem 4.3</h4>
 </div>
-<div id="problem4-3" class="panel-body collapse">
+<div id="problem4-3" class="panel-body">
 	<p>Calculate the radius of orbit for a Earth satellite in a geosynchronous orbit, where the Earth&#39;s rotational period is 86,164.1 seconds.</p>
 	<p>Recall from (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$. We want $r$ in terms of $p$.</p>
 	<ol>
@@ -495,10 +502,10 @@ energy we have</p>
 <p>(4.18) $R_a = \frac{R_p}{\left ( \frac{2GM}{R_pV_p^2} - 1 \right )}$, and</p>
 <p>(4.19) $R_p = \frac{R_a}{\left ( \frac{2GM}{R_aV_a^2} - 1 \right )}$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-4">
+<div class="panel-heading" href="#problem4-4">
 <h4>Problem 4.4</h4>
 </div>
-<div id="problem4-4" class="panel-body collapse">
+<div id="problem4-4" class="panel-body">
 <p>An artificial Earth satellite is in an elliptical orbit which brings it to an altitude of 250 km at perigee and out to an altitude of 500 km at apogee. Calculate the velocity of the satellite at both perigee and apogee.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-4">
       Show solution</button></p>
@@ -517,10 +524,10 @@ emit(&#34;V_a: %d m/s&#34;, V_a(R_a, R_p));</code></pre>
 </div>
 </div>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-5">
+<div class="panel-heading" href="#problem4-5">
 <h4>Problem 4.5</h4>
 </div>
-<div id="problem4-5" class="panel-body collapse">
+<div id="problem4-5" class="panel-body">
 <p>A satellite in Earth orbit passes through its perigee point at an altitude of 200 km above the Earth&#39;s surface and at a velocity of 7,850 m/s. Calculate the apogee altitude of the satellite.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-5">
       Show solution</button></p>
@@ -541,10 +548,10 @@ emit(
 <p>The eccentricity $e$ of an orbit is given by</p>
 <p>(4.20) $e = \frac{R_pV_p^2}{GM} - 1$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-6">
+<div class="panel-heading" href="#problem4-6">
 <h4>Problem 4.6</h4>
 </div>
-<div id="problem4-6" class="panel-body collapse">
+<div id="problem4-6" class="panel-body">
 <p>Calculate the eccentricity of the orbit for the satellite in problem 4.5.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-6">
       Show solution</button></p>
@@ -562,10 +569,10 @@ the periapsis and apoapsis distances can be calculated by</p>
 <p>(4.22) $R_a = a(1+e)$</p>
 <p>also note $R_p+R_a = 2a$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-7">
+<div class="panel-heading" href="#problem4-7">
 <h4>Problem 4.7</h4>
 </div>
-<div id="problem4-7" class="panel-body collapse">
+<div id="problem4-7" class="panel-body">
 <p>A satellite in Earth orbit has a semi-major axis of 6,700 km and an eccentricity
 of 0.01. Calculate the satellite&#39;s altitude at both perigee and apogee.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-7">
@@ -620,10 +627,10 @@ corresponds to the apoapsis radius, $R_a$.</p>
 either perigee or apogee, i.e. $\gamma = 90$. This condition results in the
 minimum use of propellant.</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-8">
+<div class="panel-heading" href="#problem4-8">
 <h4>Problem 4.8</h4>
 </div>
-<div id="problem4-8" class="panel-body collapse">
+<div id="problem4-8" class="panel-body">
 <p>A satellite is launched into Earth orbit where its launch vehicle burns out at
 an altitude of 250 km.  At burnout the satellite&#39;s velocity is 7,900 m/s with the
 zenith angle equal to 89 degrees.  Calculate the satellite&#39;s altitude at perigee
@@ -648,10 +655,10 @@ of the orbit can be calculated, however, it may be simpler to calculate the
 eccentricity $e$ directly from the equation</p>
 <p>(4.27) $e = \sqrt{\left(\frac{r_1v_1^2}{GM}-1\right)^2\sin^2\gamma_1+\cos^2\gamma_1}$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-9">
+<div class="panel-heading" href="#problem4-9">
 <h4>Problem 4.9</h4>
 </div>
-<div id="problem4-9" class="panel-body collapse">
+<div id="problem4-9" class="panel-body">
 <p>Calculate the eccentricity of the orbit for the satellite in problem 4.8.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-9">
       Show solution</button></p>
@@ -671,10 +678,10 @@ emit(&#34;e = %.7f&#34;, e(r1, v1, g1));</code></pre>
 <p>To pin down a satellite&#39;s orbit in space, we need to know the angle $\nu$, the true anomaly, from the periapsis point to the launch point. This angle is given by</p>
 <p>(4.28) $\tan\nu = \dfrac{\left(\frac{r_1v_1^2}{GM}\right)\sin\gamma_1\cos\gamma_1}{\left(\frac{r_1v_1^2}{GM}\right)\sin^2\gamma_1 - 1}$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-10">
+<div class="panel-heading" href="#problem4-10">
 <h4>Problem 4.10</h4>
 </div>
-<div id="problem4-10" class="panel-body collapse">
+<div id="problem4-10" class="panel-body">
 <p>Calculate the true anomaly, $\nu$ from perigee point to launch point for the satellite
 in problem 4.8.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-10">
@@ -699,10 +706,10 @@ follows:</p>
 easier to calculate it directly as follows:</p>
 <p>(4.32) $a = \dfrac{1}{\left(\frac{2}{r} - \frac{v^2}{GM}\right)}$</p>
 <div class="panel panel-default">
-<div class="panel-heading" data-toggle="collapse" href="#problem4-11">
+<div class="panel-heading" href="#problem4-11">
 <h4>Problem 4.11</h4>
 </div>
-<div id="problem4-11" class="panel-body collapse">
+<div id="problem4-11" class="panel-body">
 <p>Calculate the semi-major axis of the orbit for the satellite in problem 4.8.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-11">
       Show solution</button></p>
@@ -717,11 +724,17 @@ emit(&#34;%d m&#34;, a(r1, v1));</code></pre>
 <p>If $e$ is solved for directly using equation (4.27) or (4.30), and $a$ is solved
 for using equation (4.32), $R_p$ and $R_a$ can be solved for simply using
 equations (4.21) and (4.22).</p>
-<h4>Orbit Tile, Rotation and Orientation</h4>
-<p>Above we determined the size and shape of the orbit, but to determine the
+<h1>The End.</h1>
+<p>The next bit requires a notion of &#34;sidereal time&#34;, which has to do with the position of the Earth relative to some fixed stars. This starts going into some very heavy math involving real-world circumstances and I was never able to find or write a Javascript library to compute the &#34;local apparent sidereal time&#34; - required for the problem sets. If anyone reads this and feels the urge to fill me in, feel free to drop me a line.</p>
+<!--
+# TODO
+#### Orbit Tilt, Rotation and Orientation
+
+Above we determined the size and shape of the orbit, but to determine the
 orientation of the orbit in space, we must know the latitude and longitude and
-the heading of the space vehicle at burnout.</p>
-<p>Figure 4.9 above illustrates the location of a space vehicle at engine burnout,
+the heading of the space vehicle at burnout.
+
+Figure 4.9 above illustrates the location of a space vehicle at engine burnout,
 or orbit insertion. $\beta$ is the azimuth heading measured in degrees clockwise
 from north, $\delta$ is the geocentric latitude (or declination) of the burnout
 point, $\Delta\lambda$ is the angular distance between the ascending node and the
@@ -731,29 +744,42 @@ orbital plane. $\lambda_1$ and $\lambda_2$ are the geographical longitudes of
 the ascending node and the burnout point at the instant of engine burnout.
 Figure 4.10 pictures the orbital elements, where $i$ is the inclination,
 $\Omega$ is the longitude at the ascending node, $\omega$ is the argument of
-periapsis, and $\nu$ is the true anomaly.</p>
-<p>If $\beta$, $\delta$, and $\lambda_2$ are given, the other values can be
-calculated from the following relationships:</p>
-<p>(4.33) $\cos i = \cos \delta \sin \beta$</p>
-<p>(4.34) $\tan \ell = \dfrac{\tan\delta}{\cos\beta}$</p>
-<p>(4.35) $\tan \Delta\lambda = \sin \delta \tan \beta$</p>
-<p>(4.36) $\omega = \ell - \nu$</p>
-<p>(4.37) $\lambda_1 = \lambda_2 - \Delta \lambda$</p>
-<p>In equation (4.36), the value of $\nu$ is found using equation (4.28) or (4.31).
+periapsis, and $\nu$ is the true anomaly.
+
+If $\beta$, $\delta$, and $\lambda_2$ are given, the other values can be
+calculated from the following relationships:
+
+(4.33) $\cos i = \cos \delta \sin \beta$
+
+(4.34) $\tan \ell = \dfrac{\tan\delta}{\cos\beta}$
+
+(4.35) $\tan \Delta\lambda = \sin \delta \tan \beta$
+
+(4.36) $\omega = \ell - \nu$
+
+(4.37) $\lambda_1 = \lambda_2 - \Delta \lambda$
+
+In equation (4.36), the value of $\nu$ is found using equation (4.28) or (4.31).
 If $\nu$ is positive, periapsis is west of the burnout point (as shown in
-figure 4.10). If $\nu$ is negative, periapsis is east of the burnout point.</p>
-<p>The logitude of the ascending node, $\Omega$, is measured in celestial
+figure 4.10). If $\nu$ is negative, periapsis is east of the burnout point.
+
+The logitude of the ascending node, $\Omega$, is measured in celestial
 longitude, while $\lambda_1$ is geographical longitude. The celestial longitude
-of the ascending node is equal to the <em>local apparent sidereal time</em>, in
+of the ascending node is equal to the *local apparent sidereal time*, in
 degrees, at longitude $\lambda_1$ at the time of engine burnout. Sidereal time
 is defined as the hour angle of the vernal equinox at a specific locality and
 time; it has the same value as the right ascension of any celestial body that is
 crossing the local meridian at that same instant. At the moment when the vernal
 equinox crosses the local meridian the local apparent sidereal time is 00:00.
-Try the below sidereal time calculator:</p><script src="/js/moment.min.js"></script>
+Try the below sidereal time calculator:
+--><script src="/js/moment.min.js"></script>
 <script src="/js/sidereal.js"></script></p>
-<pre><code class="javascript">var last = local_apparent_sidereal_time(-142.483, new Date(2000, 10, 20, 15));
-emit(&#34;%.2f&#34;, last);</code></pre>
+<!--
+```javascript
+var last = local_apparent_sidereal_time(-142.483, new Date(2000, 10, 20, 15));
+emit("%.2f", last);
+```
+-->
 			</div>
 			<div class="clearfix"></div>
 			
@@ -764,7 +790,6 @@ emit(&#34;%.2f&#34;, last);</code></pre>
 	<p>
 		Looks awesome because of
 		<a href="http://getbootstrap.com/">bootstrap</a>,
-		<a href="https://github.com/etherealmachine/blackfriday">blackfriday</a>,
 		<a href="http://daringfireball.net/projects/markdown/">markdown</a>,
 		<a href="https://highlightjs.org/">highlightjs</a>,
 		and <a href="https://www.mathjax.org/">MathJax</a>
