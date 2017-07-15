@@ -48,10 +48,12 @@ trajectories.
 
 ## Conic Sections
 
+<div class="pull-right text-center">
 <img
 		src="https://docs.google.com/drawings/d/10ZCeL3pW5HNIdKgpMf9yFGcJVJxbrKnePySc7P0_R0E/pub?w=814&amp;h=590"
-		width="500px"
-		class="pull-right" />
+		width="500">
+<p>Figure 4.1</p>
+</div>
 
 A **conic section**, or just **conic**, is a curve formed by passing a plane
 through a right circular cone. As shown in Figure 4.1, the angular orientation
@@ -88,9 +90,15 @@ orbit.
 
 ## Orbital Elements
 
-<img src="https://docs.google.com/drawings/d/1BG0F1-S68af_zFCensPH5E_p_X2xpfRd0O17uaTiJ2g/pub?w=960&amp;h=720" width="600" class="pull-right">
+<div class="pull-right text-center">
+<img src="https://docs.google.com/drawings/d/1BG0F1-S68af_zFCensPH5E_p_X2xpfRd0O17uaTiJ2g/pub?w=960&amp;h=720" width="600">
+<p>Figure 4.3</p>
+</div>
 
-<img src="https://docs.google.com/drawings/d/1H1S8gk48pfl65cl1Kcs8SH4NjnRdl-Js0HSX5vq5U_E/pub?w=480&amp;h=360" width="350" class="pull-right">
+<div class="pull-right text-center">
+<img src="https://docs.google.com/drawings/d/1H1S8gk48pfl65cl1Kcs8SH4NjnRdl-Js0HSX5vq5U_E/pub?w=480&amp;h=360" width="350">
+<p>Figure 4.2</p>
+</div>
 
 To mathematically describe an orbit one must define six quantities, called
 orbital elements. They are
