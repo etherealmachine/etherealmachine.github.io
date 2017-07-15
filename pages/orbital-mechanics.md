@@ -88,7 +88,9 @@ orbit.
 
 ## Orbital Elements
 
-<img src="https://docs.google.com/drawings/d/1H1S8gk48pfl65cl1Kcs8SH4NjnRdl-Js0HSX5vq5U_E/pub?w=480&amp;h=360" width="400" class="pull-right" />
+<img src="https://docs.google.com/drawings/d/1BG0F1-S68af_zFCensPH5E_p_X2xpfRd0O17uaTiJ2g/pub?w=960&amp;h=720" width="600" class="pull-right">
+
+<img src="https://docs.google.com/drawings/d/1H1S8gk48pfl65cl1Kcs8SH4NjnRdl-Js0HSX5vq5U_E/pub?w=480&amp;h=360" width="350" class="pull-right">
 
 To mathematically describe an orbit one must define six quantities, called
 orbital elements. They are
