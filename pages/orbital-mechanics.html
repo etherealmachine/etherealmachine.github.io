@@ -174,20 +174,27 @@ the type of conic section.</p>
 <p>Satellite orbits can be any of the four conic sections. This page deals mostly
 with elliptical orbits, though we conclude with an examination of the hyperbolic
 orbit.</p>
-<h2>Orbital Elements</h2>
+<h2>Orbital Elements</h2><img src="https://docs.google.com/drawings/d/1H1S8gk48pfl65cl1Kcs8SH4NjnRdl-Js0HSX5vq5U_E/pub?w=480&amp;h=360" width="400" class="pull-right"/></p>
 <p>To mathematically describe an orbit one must define six quantities, called
-orbital elements. They are
-<em> Semi-Major Axis, a </em> Eccentricity, e
-<em> Inclination, i </em> Argument of Periapsis, $\omega$
-<em> Time of Periapsis Passage, T </em> Longitude of Ascending Node, $\Omega$</p>
+orbital elements. They are</p>
+<ul>
+<li>Semi-Major Axis, a</li>
+<li>Eccentricity, e</li>
+<li>Inclination, i</li>
+<li>Argument of Periapsis, $\omega$</li>
+<li>Time of Periapsis Passage, T</li>
+<li>Longitude of Ascending Node, $\Omega$</li>
+</ul>
 <p>An orbiting satellite follows an oval shaped path known as an ellipse with the
 body being orbited, called the primary, located at one of two points called
 foci. An ellipse is defined to be a curve with the following property: for each
 point on an ellipse, the sum of its distances from two fixed points, called
 foci, is constant (see Figure 4.2). The longest and shortest lines that can be
 drawn through the center of an ellipse are called the major axis and minor axis,
-respectively. The <strong>semi-major axis</strong> is one-half of the major axis and
-represents a satellite&#39;s mean distance from its primary. <strong>Eccentricity</strong> is the
+respectively.</p>
+<p>The <strong>semi-major axis</strong> is one-half of the major axis and
+represents a satellite&#39;s mean distance from its primary.</p>
+<p><strong>Eccentricity</strong> is the
 distance between the foci divided by the length of the major axis and is a
 number between zero and one. An eccentricity of zero indicates a circle.</p>
 <p><strong>Inclination</strong> is the angular distance between a satellite&#39;s orbital plane and
@@ -356,16 +363,16 @@ for a circular orbit,</p>
 <p>(4.6) $v = \sqrt{\frac{GM}{r}}$</p>
 <div class="panel panel-default">
 <div class="panel-heading" href="#problem4-1">
-	<h4>Problem 4.1</h4>
+<h4>Problem 4.1</h4>
 </div>
 <div id="problem4-1" class="panel-body">
-	<p>Calculate the velocity of an artificial satellite orbiting the Earth in a
+<p>Calculate the velocity of an artificial satellite orbiting the Earth in a
 circular orbit at an altitude of 200 km above the Earth&#39;s surface.</p>
-	<p>Note that the radius of the earth is 6,378.14 km.</p>
-	<p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-1">
+<p>Note that the radius of the earth is 6,378.14 km.</p>
+<p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-1">
       Show solution</button></p>
-	<div id="solution4-1" class="collapse">
-		<pre><code class="javascript">var GM = 3.986005e14;
+<div id="solution4-1" class="collapse">
+	<pre><code class="javascript">var GM = 3.986005e14;
 function v(r) {
   return Math.sqrt(GM/r);
 }
@@ -373,7 +380,7 @@ var R_earth = 6378.14 * 1000; // meters
 var altitude_satellite = 200 * 1000; // meters
 var R_satellite = R_earth + altitude_satellite;
 emit(&#34;velocity: %d m/s&#34;, v(R_satellite));</code></pre>
-	</div>
+</div>
 </div>
 </div>
 <h3>Motions of Planets and Satellites</h3>
@@ -426,36 +433,36 @@ semi-major axis ($a$) of the orbit.</p>
 law of planetary motion, that is $p^2 \sim r^3$.</p>
 <div class="panel panel-default">
 <div class="panel-heading" href="#problem4-2">
-	<h4>Problem 4.2</h4>
+<h4>Problem 4.2</h4>
 </div>
 <div id="problem4-2" class="panel-body">
-	<p>Calculate the period of revolution for the satellite in problem 4.1.</p>
-	<p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-2">
+<p>Calculate the period of revolution for the satellite in problem 4.1.</p>
+<p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-2">
       Show solution</button></p>
-	<div id="solution4-2" class="collapse">
-		<pre><code class="javascript">function p(r) {
+<div id="solution4-2" class="collapse">
+	<pre><code class="javascript">function p(r) {
   return Math.sqrt((4 * Math.pow(Math.PI, 2) * Math.pow(r, 3)) / GM);
 }
 emit(&#34;period: %d seconds&#34;, p(R_satellite));</code></pre>
-	</div>
+</div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading" href="#problem4-3">
-	<h4>Problem 4.3</h4>
+<h4>Problem 4.3</h4>
 </div>
 <div id="problem4-3" class="panel-body">
-	<p>Calculate the radius of orbit for a Earth satellite in a geosynchronous orbit, where the Earth&#39;s rotational period is 86,164.1 seconds.</p>
-	<p>Recall from (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$. We want $r$ in terms of $p$.</p>
-	<ol>
-		<li>$p^2 = \frac{4\pi^2r^3}{GM}$</li>
-		<li>$p^2 GM = 4\pi^2r^3$</li>
-		<li>$\frac{p^2 GM}{4\pi^2} = r^3$</li>
-		<li>$r = \sqrt[3]{\frac{p^2 GM}{4\pi^2}}$</li>
-	</ol><button class="btn btn-primary" data-toggle="collapse" href="#solution4-3">
+<p>Calculate the radius of orbit for a Earth satellite in a geosynchronous orbit, where the Earth&#39;s rotational period is 86,164.1 seconds.</p>
+<p>Recall from (4.9) $p^2 = \frac{4\pi^2r^3}{GM}$. We want $r$ in terms of $p$.</p>
+<ol>
+	<li>$p^2 = \frac{4\pi^2r^3}{GM}$</li>
+	<li>$p^2 GM = 4\pi^2r^3$</li>
+	<li>$\frac{p^2 GM}{4\pi^2} = r^3$</li>
+	<li>$r = \sqrt[3]{\frac{p^2 GM}{4\pi^2}}$</li>
+</ol><button class="btn btn-primary" data-toggle="collapse" href="#solution4-3">
       Show solution</button></p>
 <div id="solution4-3" class="collapse">
-	<pre><code class="javascript">function r(p) {
+<pre><code class="javascript">function r(p) {
   return Math.cbrt((Math.pow(p, 2) * GM) / (4 * Math.pow(Math.PI, 2)));
 }
 emit(&#34;radius: %d meters&#34;, r(86164.1));</code></pre>
@@ -525,7 +532,7 @@ energy we have</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-4">
       Show solution</button></p>
 <div id="solution4-4" class="collapse">
-	<pre><code class="javascript">function V_p(R_a, R_p) {
+<pre><code class="javascript">function V_p(R_a, R_p) {
   return Math.sqrt((2 * GM * R_a) / (R_p * (R_a + R_p)));
 };
 function V_a(R_a, R_p) {
@@ -547,11 +554,11 @@ emit(&#34;V_a: %d m/s&#34;, V_a(R_a, R_p));</code></pre>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-5">
       Show solution</button></p>
 <div id="solution4-5" class="collapse">
-	<p>$V_p = 7850 m/s$</p>
-	<p>$R_p = R_{earth} + 200 km$</p>
-	<p>want to find $R_a$</p>
-	<p>(4.18) $R_a = \frac{R_p}{\left ( \frac{2GM}{R_pV_p^2} - 1 \right )}$</p>
-	<pre><code class="javascript">function R_a(R_p, V_p) {
+<p>$V_p = 7850 m/s$</p>
+<p>$R_p = R_{earth} + 200 km$</p>
+<p>want to find $R_a$</p>
+<p>(4.18) $R_a = \frac{R_p}{\left ( \frac{2GM}{R_pV_p^2} - 1 \right )}$</p>
+<pre><code class="javascript">function R_a(R_p, V_p) {
   return R_p / (((2*GM)/(R_p*Math.pow(V_p, 2))) - 1);
 }
 emit(
@@ -571,7 +578,7 @@ emit(
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-6">
       Show solution</button></p>
 <div id="solution4-6" class="collapse">
-	<pre><code class="javascript">function e(R_p, V_p) {
+<pre><code class="javascript">function e(R_p, V_p) {
   return ((R_p * Math.pow(V_p, 2)) / GM) - 1;
 }
 emit(&#34;e = %.5f&#34;, e(R_earth + 200*1000, 7850));</code></pre>
@@ -593,7 +600,7 @@ of 0.01. Calculate the satellite&#39;s altitude at both perigee and apogee.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-7">
       Show solution</button></p>
 <div id="solution4-7" class="collapse">
-	<pre><code class="javascript">a = 6700 * 1000; // meters
+<pre><code class="javascript">a = 6700 * 1000; // meters
 e = 0.01;
 R_p = a*(1 - e);
 R_a = a*(1 + e);
@@ -653,7 +660,7 @@ and apogee.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-8">
       Show solution</button></p>
 <div id="solution4-8" class="collapse">
-	<pre><code class="javascript">var r1 = R_earth + (250*1000);
+<pre><code class="javascript">var r1 = R_earth + (250*1000);
 var v1 = 7900;
 var g1 = 89 * (Math.PI / 180);
 var C = (2*GM) / (r1 * Math.pow(v1, 2));
@@ -678,7 +685,7 @@ eccentricity $e$ directly from the equation</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-9">
       Show solution</button></p>
 <div id="solution4-9" class="collapse">
-	<pre><code class="javascript">var r1 = R_earth + (250*1000);
+<pre><code class="javascript">var r1 = R_earth + (250*1000);
 var v1 = 7900;
 var g1 = 89 * (Math.PI / 180);
 function e(r1, v1, g1) {
@@ -702,7 +709,7 @@ in problem 4.8.</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-10">
       Show solution</button></p>
 <div id="solution4-10" class="collapse">
-	<pre><code class="javascript">var rvGM = (r1*Math.pow(v1, 2))/GM;
+<pre><code class="javascript">var rvGM = (r1*Math.pow(v1, 2))/GM;
 var v = Math.atan((rvGM*Math.sin(g1)*Math.cos(g1))/((rvGM*Math.pow(Math.sin(g1), 2)) - 1));
 emit(&#34;true anomaly = %.3f°&#34;, v / (Math.PI / 180));</code></pre>
 </div>
@@ -729,7 +736,7 @@ easier to calculate it directly as follows:</p>
 <p><button class="btn btn-primary" data-toggle="collapse" href="#solution4-11">
       Show solution</button></p>
 <div id="solution4-11" class="collapse">
-	<pre><code class="javascript">function a(r, v) {
+<pre><code class="javascript">function a(r, v) {
   return 1 / ((2 / r) - (Math.pow(v, 2) / GM));
 }
 emit(&#34;%d m&#34;, a(r1, v1));</code></pre>

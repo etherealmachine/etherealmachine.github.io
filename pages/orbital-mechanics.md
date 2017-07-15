@@ -88,8 +88,11 @@ orbit.
 
 ## Orbital Elements
 
+<img src="https://docs.google.com/drawings/d/1H1S8gk48pfl65cl1Kcs8SH4NjnRdl-Js0HSX5vq5U_E/pub?w=480&amp;h=360" width="400" class="pull-right" />
+
 To mathematically describe an orbit one must define six quantities, called
 orbital elements. They are
+
 * Semi-Major Axis, a
 * Eccentricity, e
 * Inclination, i
@@ -103,8 +106,12 @@ foci. An ellipse is defined to be a curve with the following property: for each
 point on an ellipse, the sum of its distances from two fixed points, called
 foci, is constant (see Figure 4.2). The longest and shortest lines that can be
 drawn through the center of an ellipse are called the major axis and minor axis,
-respectively. The **semi-major axis** is one-half of the major axis and
-represents a satellite's mean distance from its primary. **Eccentricity** is the
+respectively.
+
+The **semi-major axis** is one-half of the major axis and
+represents a satellite's mean distance from its primary.
+
+**Eccentricity** is the
 distance between the foci divided by the length of the major axis and is a
 number between zero and one. An eccentricity of zero indicates a circle.
 
