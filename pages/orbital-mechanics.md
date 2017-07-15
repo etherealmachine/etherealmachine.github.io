@@ -20,7 +20,7 @@ This page is a work-in-progress.
   </div>
 </div>
 
-<script src="/js/emit.js"></script>
+<script defer src="/js/emit.js"></script>
 <div class="well">
 <p>
 This is a copy of Robert A. Braeunig's inestimable
