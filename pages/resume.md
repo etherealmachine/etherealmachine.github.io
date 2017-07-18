@@ -4,23 +4,45 @@ published: true
 
 <pre class="pull-left"><code class="nohighlight">James Pettit
 \<james.l.pettit@gmail.com\>
-[https://github.com/etherealmachine](https://github.com/etherealmachine)
-</code></pre>
+[https://github.com/etherealmachine](https://github.com/etherealmachine)</code></pre>
+
+<style scoped>
+	pre.paragraph {
+		width: 40%;
+		word-break: inherit;
+		word-wrap: inherit;
+	}
+	.fav {
+		padding: 0 10px 0 10px;
+	}
+</style>
+
+<pre class="paragraph pull-right"><code class="nohighlight">Full stack application developer. Loves agile web development, building low-latency rock-solid backends, and the occasional foray into machine learning.</code></pre>
+
 <div class="clearfix"></div>
 
-## Favorite
+<div class="fav pull-left">
+<h4>Languages</h4>
+`Go, Python, Java, Javascript, C`
+</div>
 
-Languages: `Go, Python, Java, Javascript, C`
+<div class="fav pull-left">
+<h4>Libraries</h4>
+`AngularJS, AppEngine, Polymer, Tensorflow`
+</div>
 
-Frameworks: `AngularJS, AppEngine, Polymer, Tensorflow`
+<div class="fav pull-left">
+<h4>Systems</h4>
+`Redis, Spanner, Postgres, BigTable, Hadoop, Datastore`
+</div>
 
-Systems: `Redis, Spanner, Postgres, BigTable, Hadoop, Datastore`
+<div class="clearfix"></div>
 
 ## Experience
 
 ### Software Engineer @ Google, Inc. <small>2014 - 2017</small>
 
-On the Skybox/Terra Bella team responsible for delivering imagery and analytics to customers.
+On the Skybox/Terra Bella team responsible for delivering satellite imagery and analytics to customers.
 
 *	Customizable web application to view, track, and analyze change over time across the globe.
 *	Golang backend, mixed AppEngine and microservice architecture.
@@ -58,13 +80,6 @@ On the team responsible for scaling Google support for millions of customers. Sy
 	*	[https://github.com/etherealmachine/hivemind](https://github.com/etherealmachine/hivemind)
 
 ### B.S. Computer Science, UC Santa Cruz <small>2007</small>
-
-## Professional Interests
-
-*	Real time web applications on the bleeding edge of the web and HTML5 - Websockets, WebRTC, Polymer, and React
-*	Machine learning, especially deep learning.
-*	Security, especially relating to data confidentiality and access auditing
-*	Cryptocurrencies and other cryptographic oddities
 
 ## Personal Projects
 
