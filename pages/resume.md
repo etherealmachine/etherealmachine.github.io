@@ -49,7 +49,7 @@ On the Skybox/Terra Bella team responsible for delivering satellite imagery and 
 *	Polymer no-framework frontend.
 *	Personally responsible for the Spanner-based database microservice.
 
-### Software Engineer @ Google, Inc. <small>2012 - 2014</small>
+### Technical Solutions Engineer @ Google, Inc. <small>2012 - 2014</small>
 
 On the team responsible for scaling Google support for millions of customers. Systems include:
 
