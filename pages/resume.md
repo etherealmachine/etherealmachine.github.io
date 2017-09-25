@@ -64,7 +64,7 @@ On the team responsible for scaling Google support for millions of customers. Sy
 	*	A Java-based framework with a plugin architecture based on dynamic class loading.
 	*	Allowed rapid prototyping and completion of experiments running under soft real-time constraints in a multi-user networked environment.
 	*	[Full PDF](http://leeps.ucsc.edu/media/papers/Pettit_et_al_2013_V_20130821.pdf)
-	*	Source and documentation available at [https://leeps.ucsc.edu/cong](https://github.com/RedwoodAdmin/RedwoodFramework)
+	*	Source and documentation available at [https://leeps.ucsc.edu/cong](https://leeps.ucsc.edu/cong)
 *	[https://github.com/RedwoodAdmin/RedwoodFramework](https://github.com/RedwoodAdmin/RedwoodFramework)
 	*	Next-generation experimental software development system.
 	*	Web-based frontend allowing HTML5 web development knowledge to be used to develop experimental software.
